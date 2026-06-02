@@ -876,3 +876,125 @@ document.addEventListener("DOMContentLoaded", () => {
         console.log("Seamless infinite marquee successfully initialized.");
     }
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    const stack = document.getElementById('teamStack');
+    const btnNext = document.getElementById('btnNext');
+    const btnPrev = document.getElementById('btnPrev');
+    
+    const elCounter = document.getElementById('sCounter');
+    const elName = document.getElementById('sName');
+    const elRole = document.getElementById('sRole');
+    
+    let isAnimating = false;
+    let autoPlayTimer;
+
+    // NEW: Bulletproof class assigner based on HTML order
+    function updateCardPositions() {
+        const cards = Array.from(stack.children);
+        const len = cards.length;
+        
+        cards.forEach((card, index) => {
+        // Clear previous states
+        card.classList.remove('pos-1', 'pos-2', 'pos-3', 'pos-hidden');
+        
+        // Assign new states based on order
+        if (index === len - 1) card.classList.add('pos-1');
+        else if (index === len - 2) card.classList.add('pos-2');
+        else if (index === len - 3) card.classList.add('pos-3');
+        else card.classList.add('pos-hidden');
+        });
+    }
+
+    function updateData(activeCard) {
+        if(!activeCard) return;
+        elCounter.textContent = activeCard.dataset.index;
+        elName.textContent = activeCard.dataset.name;
+        elRole.textContent = activeCard.dataset.role;
+    }
+
+    function moveNext() {
+        if (isAnimating) return;
+        isAnimating = true;
+
+        const topCard = stack.lastElementChild;
+        const nextCard = stack.children[stack.children.length - 2]; 
+
+        updateData(nextCard);
+
+        // Pre-straighten the upcoming card for a smooth visual transition
+        if (nextCard) {
+        nextCard.classList.remove('pos-2');
+        nextCard.classList.add('pos-1');
+        }
+
+        // Trigger exit
+        topCard.classList.add('slide-out-right');
+
+        setTimeout(() => {
+        topCard.classList.remove('slide-out-right');
+        // Move card to the back of the line
+        stack.prepend(topCard); 
+        
+        // Force the browser to recalculate everyone's position
+        updateCardPositions(); 
+        isAnimating = false;
+        }, 400); 
+    }
+
+    function movePrev() {
+        if (isAnimating) return;
+        isAnimating = true;
+
+        const bottomCard = stack.firstElementChild;
+        
+        // Move from back of the line to the front
+        stack.append(bottomCard);
+        
+        // Assign proper top-card class immediately
+        updateCardPositions(); 
+        
+        // Prep it off-screen to the left
+        bottomCard.classList.add('slide-out-left');
+        
+        // Force a browser reflow (the magic trick to fix Safari/Chrome glitches)
+        void bottomCard.offsetWidth; 
+        
+        // Let it slide into its new 'pos-1' state
+        bottomCard.classList.remove('slide-out-left');
+        
+        updateData(bottomCard);
+
+        setTimeout(() => {
+        isAnimating = false;
+        }, 400);
+    }
+
+    // Auto-play Logic
+    function startAutoPlay() {
+        autoPlayTimer = setInterval(moveNext, 2000);
+    }
+
+    function stopAutoPlay() {
+        clearInterval(autoPlayTimer);
+    }
+
+    // Event Listeners
+    btnNext.addEventListener('click', () => {
+        moveNext();
+        stopAutoPlay(); startAutoPlay(); 
+    });
+    
+    btnPrev.addEventListener('click', () => {
+        movePrev();
+        stopAutoPlay(); startAutoPlay();
+    });
+
+    stack.addEventListener('mouseenter', stopAutoPlay);
+    stack.addEventListener('mouseleave', startAutoPlay);
+
+    // Initialize First State
+    updateCardPositions();
+    updateData(stack.lastElementChild);
+    startAutoPlay();
+});
