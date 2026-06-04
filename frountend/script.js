@@ -1236,3 +1236,30 @@ document.addEventListener("DOMContentLoaded", () => {
   renderGalleryCycle();
   startAutomatedLoop();
 });
+
+// ==========================================
+// SCROLL ANIMATION OBSERVER
+// ==========================================
+document.addEventListener("DOMContentLoaded", () => {
+    const observerOptions = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.15
+    };
+
+    const scrollObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('animate-in');
+                // Optional: Stop observing if we only want it to animate once
+                // observer.unobserve(entry.target); 
+            } else {
+                // Remove class when out of view if we want it to animate every time
+                entry.target.classList.remove('animate-in');
+            }
+        });
+    }, observerOptions);
+
+    const animatedElements = document.querySelectorAll('.animate-on-scroll');
+    animatedElements.forEach(el => scrollObserver.observe(el));
+});

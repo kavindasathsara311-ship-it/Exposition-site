@@ -56,7 +56,6 @@ body {
     max-width: 1200px; /* Prevents it from getting absurdly wide on huge monitors */
     margin-top: 2vh;
     height: 70px;
-    background: var(--card-bg);
     backdrop-filter: blur(var(--nav-blur)); /* Trendy glassmorphism look */
     -webkit-backdrop-filter: blur(var(--nav-blur));
     border: 1px solid rgba(255, 255, 255, 0.1); /* Subtle inner glow border */
@@ -68,6 +67,7 @@ body {
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease; /* Ultra smooth transition */
     z-index: 1000;
     padding: 0 10px;
+    background-color: rgba(25, 34, 48, 0.15);
 }
 .nav-logo{
     height: 60px;
@@ -860,63 +860,167 @@ section{
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to top, var(--gold-liquid), rgba(212, 175, 55, 0.8));
+  background: linear-gradient(to top, var(--gold-liquid, rgba(212, 175, 55, 0.5)), rgba(212, 175, 55, 0.5));
   
-  /* Blurs the top edge of the liquid slightly for a localized glow effect */
-  box-shadow: inset 0 10px 20px rgba(212, 175, 55, 0.9); 
+  box-shadow: inset 0 10px 20px rgba(212, 175, 55, 0.5); 
   
   transform-origin: bottom;
-  transform: scaleY(0);
+  transform: scaleY(0.5);
   
-  /* Custom physics-based cubic-bezier curve for that "snappy" liquid feel */
-  animation: premiumLiquidFill 3s cubic-bezier(0.25, 1.4, 0.5, 0.95) forwards infinite;
+  /* Smooth fluid swelling */
+  animation: premiumLiquidFill 4s ease-in-out forwards infinite;
   z-index: -1;
 }
 
-/* Outer Capsule Glow Animation */
+/* Outer Capsule Glow and Float Animation */
 .icon-keybadge {
-  animation: capsuleGlow 3s ease-in-out forwards infinite;
+  animation: capsuleGlow 4s ease-in-out forwards infinite, floatMic 4s ease-in-out infinite;
 }
 
 /* --- THE ANIMATIONS --- */
 
+@keyframes floatMic {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
 @keyframes premiumLiquidFill {
-  0% {
-    transform: scaleY(0);
+  0%, 100% {
+    transform: scaleY(0.4); 
   }
-  35% {
-    transform: scaleY(1); /* Shoots up to 100% sharply */
-  }
-  60% {
-    transform: scaleY(0.2); /* Drops down low with a heavy fluid drag */
-  }
-  80% {
-    transform: scaleY(0.65); /* Over-bounces slightly past the halfway mark */
-  }
-  100% {
-    transform: scaleY(0.5); /* Smoothly settles perfectly at 50% */
+  50% {
+    transform: scaleY(0.7); 
   }
 }
 
 @keyframes capsuleGlow {
   0%, 100% {
-    box-shadow: 0 0 15px rgba(48, 37, 1, 0.9);
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.3), inset 0 0 15px rgba(212, 175, 55, 0.25);
   }
-  35% {
-    box-shadow: 0 0 50px var(--gold-glow); /* Intense aura glow when 100% full */
-  }
-  60% {
-    box-shadow: 0 0 10px rgba(212, 175, 55, 0.75); /* Diminishes as it drops */
-  }
-  85% {
-    box-shadow: 0 0 25px rgba(212, 175, 55, 0.9);
+  50% {
+    box-shadow: 0 0 40px rgba(212, 175, 55, 0.4), inset 0 0 25px rgba(212, 175, 55, 0.3); 
   }
 }
 
+/* ========================================================================
+   SCROLL ANIMATIONS & 3D EFFECTS
+   ======================================================================== */
+.animate-on-scroll {
+    opacity: 0;
+    filter: blur(5px);
+    will-change: transform, opacity, filter;
+    transition: all 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
 
+.fade-up {
+    transform: translateY(60px) scale(0.95);
+}
 
+.fade-up.animate-in {
+    opacity: 1;
+    filter: blur(0);
+    transform: translateY(0) scale(1);
+}
 
+.fade-in {
+    transform: scale(0.92);
+}
 
+.fade-in.animate-in {
+    opacity: 1;
+    filter: blur(0);
+    transform: scale(1);
+}
+
+/* 3D Flip Effects */
+.flip-3d {
+    transform: perspective(1000px) rotateX(25deg) translateY(40px);
+    transform-origin: bottom center;
+}
+
+.flip-3d.animate-in {
+    opacity: 1;
+    filter: blur(0);
+    transform: perspective(1000px) rotateX(0deg) translateY(0);
+}
+
+.flip-3d-y {
+    transform: perspective(1000px) rotateY(-25deg) translateX(40px);
+    transform-origin: right center;
+}
+
+.flip-3d-y.animate-in {
+    opacity: 1;
+    filter: blur(0);
+    transform: perspective(1000px) rotateY(0deg) translateX(0);
+}
+
+/* Base Hover 3D Tilt additions */
+.timeline-item .content-box,
+.s-card,
+.partner-card {
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.4s ease, border-color 0.4s ease;
+}
+
+.timeline-item .content-box:hover,
+.s-card:hover,
+.partner-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4), 0 0 15px rgba(226, 177, 60, 0.2);
+    border-color: rgba(226, 177, 60, 0.5);
+    z-index: 10;
+}
+
+/* Specific hover for carousel-card that preserves its 3D transform */
+.carousel-card:hover {
+    box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 25px rgba(226, 177, 60, 0.4);
+    border-color: rgba(226, 177, 60, 0.8);
+    filter: brightness(1.15) contrast(1.05);
+}
+
+/* Enhanced Glassmorphism & Depth for Mobile & General Polish */
+.navbar {
+    background: rgba(15, 15, 15, 0.85);
+    border-bottom: 1px solid rgba(226, 177, 60, 0.1);
+}
+
+@media (max-width: 480px) {
+    .timeline-item.left, .timeline-item.right {
+        padding-left: 20px;
+        padding-right: 20px;
+        flex-direction: column !important;
+        align-items: center;
+        text-align: center;
+    }
+    .spine-line { display: none; }
+    .timeline-item .badge-container {
+        position: relative;
+        left: auto; top: auto; right: auto;
+        transform: none;
+        margin-bottom: 15px;
+    }
+    .timeline-item.left .content-box, .timeline-item.right .content-box {
+        text-align: center;
+        width: 100%;
+    }
+    .header-main-title {
+        font-size: 2rem;
+    }
+    .slide-title {
+        font-size: 2.5rem;
+    }
+    .slide-subtitle {
+        font-size: 1rem;
+    }
+    .slide-content {
+        padding: 20px;
+        width: 95%;
+    }
+}
 
 
 
