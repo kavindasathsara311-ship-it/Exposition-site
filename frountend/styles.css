@@ -52,7 +52,7 @@ body {
     top: 0;
     left: 50%; /* Center the navbar perfectly */
     transform: translateX(-50%); 
-    width: 95vw;
+    width: 98vw;
     max-width: 1200px; /* Prevents it from getting absurdly wide on huge monitors */
     margin-top: 2vh;
     height: 70px;
@@ -67,7 +67,7 @@ body {
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3); /* Smooth shadow for depth */
     transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease; /* Ultra smooth transition */
     z-index: 1000;
-    padding: 0 20px;
+    padding: 0 10px;
 }
 .nav-logo{
     height: 60px;
@@ -99,7 +99,7 @@ body {
     font-size: 1rem;
     font-weight: 500;
     letter-spacing: 0.5px; /* Elegance spacing */
-    margin: 0 20px;
+    margin: 0 17px;
     padding: 8px 16px;
     border-radius: 12px;
     position: relative; /* Setup for the clever hover underline */
@@ -133,6 +133,150 @@ section{
     width:100vw;
     min-height:100vh;
     display:block;
+}
+
+/* Home Page Hero Slider */
+.homePage {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+    padding: 0 !important;
+    margin: 0 !important;
+}
+
+.hero-slider {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.hero-slide {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    opacity: 0;
+    z-index: 1;
+    transition: opacity 1s ease-in-out;
+}
+
+.hero-slide.active {
+    opacity: 1;
+    z-index: 2;
+}
+
+/* Add a dark gradient overlay for text readability */
+.hero-slide::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: linear-gradient(to bottom, rgba(11, 12, 16, 0.4) 0%, rgba(11, 12, 16, 0.9) 100%);
+    z-index: 0;
+}
+
+.slide-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -40%);
+    text-align: center;
+    z-index: 3;
+    width: 90%;
+    max-width: 800px;
+    padding: 40px;
+    background: rgba(20, 23, 34, 0.5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid rgba(226, 177, 60, 0.2);
+    border-radius: 24px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    opacity: 0;
+    transition: opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s;
+}
+
+.hero-slide.active .slide-content {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+}
+
+.slide-title {
+    font-family: var(--font-serif);
+    font-size: 3.5rem;
+    color: var(--gold-accent);
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.7);
+    letter-spacing: 2px;
+}
+
+.slide-subtitle {
+    font-family: var(--font-sans);
+    font-size: 1.25rem;
+    color: var(--text-main);
+    line-height: 1.6;
+}
+
+.hero-nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(20, 23, 34, 0.5);
+    border: 1px solid rgba(226, 177, 60, 0.5);
+    color: var(--gold-accent);
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.hero-nav-arrow:hover {
+    background: var(--gold-accent);
+    color: var(--deck-bg);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.hero-nav-arrow.prev-slide { left: 40px; }
+.hero-nav-arrow.next-slide { right: 40px; }
+
+.hero-nav-dots {
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    display: flex;
+    gap: 15px;
+}
+
+.hero-dot {
+    width: 20px;
+    height: 5px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.4);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+
+.hero-dot.active {
+    width: 35px;
+    background: var(--gold-bright);
+    border: none;
+    transform: scale(1.3);
+    border-color: rgba(255, 255, 255, 0.6);
 }
 
 /* Compact Header Section */

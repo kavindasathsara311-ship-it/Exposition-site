@@ -47,6 +47,70 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // ==========================================
+// 0. HOME PAGE HERO SLIDER
+// ==========================================
+document.addEventListener("DOMContentLoaded", () => {
+    const slides = document.querySelectorAll('.hero-slide');
+    const dots = document.querySelectorAll('.hero-dot');
+    const prevBtn = document.getElementById('heroPrev');
+    const nextBtn = document.getElementById('heroNext');
+    let currentHeroIndex = 0;
+    let heroInterval;
+
+    if(slides.length === 0) return;
+
+    function showHeroSlide(index) {
+        slides.forEach(slide => slide.classList.remove('active'));
+        dots.forEach(dot => dot.classList.remove('active'));
+
+        currentHeroIndex = (index + slides.length) % slides.length;
+        
+        slides[currentHeroIndex].classList.add('active');
+        if(dots[currentHeroIndex]) dots[currentHeroIndex].classList.add('active');
+    }
+
+    function nextHeroSlide() {
+        showHeroSlide(currentHeroIndex + 1);
+    }
+
+    function prevHeroSlide() {
+        showHeroSlide(currentHeroIndex - 1);
+    }
+
+    function startHeroSlider() {
+        if(heroInterval) clearInterval(heroInterval);
+        heroInterval = setInterval(nextHeroSlide, 5000);
+    }
+
+    function resetHeroSlider() {
+        startHeroSlider();
+    }
+
+    if(prevBtn) {
+        prevBtn.addEventListener('click', () => {
+            prevHeroSlide();
+            resetHeroSlider();
+        });
+    }
+
+    if(nextBtn) {
+        nextBtn.addEventListener('click', () => {
+            nextHeroSlide();
+            resetHeroSlider();
+        });
+    }
+
+    dots.forEach((dot, idx) => {
+        dot.addEventListener('click', () => {
+            showHeroSlide(idx);
+            resetHeroSlider();
+        });
+    });
+
+    startHeroSlider();
+});
+
+// ==========================================
 // 1. CAROUSEL 3D ENGINE & STATES
 // ==========================================
 let currentIndex = 0;
