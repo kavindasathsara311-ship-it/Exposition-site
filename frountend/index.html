@@ -709,6 +709,53 @@
                 </div>
             </div>
         </footer>
+        <!-- Contact Us Modal Overlay -->
+        <div class="contact-modal-overlay" id="contactModal">
+            <div class="contact-modal-container">
+                <button class="contact-modal-close" id="closeContactModal" aria-label="Close modal"><i class="fa-solid fa-xmark"></i></button>
+                
+                <div class="contact-modal-header">
+                    <h2>Get in Touch</h2>
+                    <p>We'd love to feature you in our interview series</p>
+                </div>
+
+                <form class="contact-modal-form" id="interviewForm">
+                    <div class="form-group">
+                        <label for="contactName">Your Name <span>*</span></label>
+                        <input type="text" id="contactName" placeholder="Enter your full name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contactDesignation">Your Designation <span>*</span></label>
+                        <input type="text" id="contactDesignation" placeholder="e.g., CEO, Creative Director, Engineer, etc." required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contactLinkedin">LinkedIn/Personal Website</label>
+                        <input type="url" id="contactLinkedin" placeholder="LinkedIn profile or personal website URL">
+                    </div>
+
+                    <div class="form-group-group">
+                        <div class="form-group half-width">
+                            <label for="contactPrimary">Contact Info <span>*</span></label>
+                            <input type="text" id="contactPrimary" placeholder="Option 01 (Primary Contact)&#10;Email address or phone number" required>
+                        </div>
+                        <div class="form-group half-width">
+                            <label for="contactAlternative">&nbsp;</label>
+                            <input type="text" id="contactAlternative" placeholder="Option 02 (Alternative Contact)&#10;WhatsApp, Twitter, or additional contact">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="contactMessage">Message</label>
+                        <textarea id="contactMessage" rows="4" placeholder="Tell us about yourself, your expertise, and what insights you'd like to share in an interview..."></textarea>
+                    </div>
+
+                    <button type="submit" class="submit-btn">Send Message</button>
+                </form>
+            </div>
+        </div>
+
         <script src="script.js"></script>
     </body>
 </html>

@@ -1263,3 +1263,49 @@ document.addEventListener("DOMContentLoaded", () => {
     const animatedElements = document.querySelectorAll('.animate-on-scroll');
     animatedElements.forEach(el => scrollObserver.observe(el));
 });
+
+// ==========================================
+// CONTACT US MODAL LOGIC
+// ==========================================
+
+// Global function to open modal (called from inline onclick in HTML)
+function contactUs() {
+    const modal = document.getElementById('contactModal');
+    if (modal) {
+        modal.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Prevent background scrolling
+    }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const modal = document.getElementById('contactModal');
+    const closeBtn = document.getElementById('closeContactModal');
+    
+    if (modal && closeBtn) {
+        // Close modal when clicking the X button
+        closeBtn.addEventListener('click', () => {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+        
+        // Close modal when clicking outside the container
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+        
+        // Prevent form from actually submitting and refreshing the page (for now)
+        const form = document.getElementById('interviewForm');
+        if (form) {
+            form.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Thank you for reaching out! We will get back to you soon.');
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+                form.reset();
+            });
+        }
+    }
+});
