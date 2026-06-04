@@ -19,6 +19,31 @@ window.addEventListener("scroll", () => {
     lastScroll = currentScroll;
 });
 
+// Mobile Navbar Toggle Logic
+document.addEventListener("DOMContentLoaded", () => {
+    const navToggle = document.getElementById("navToggle");
+    const navLinks = document.getElementById("navLinks");
+
+    if (navToggle && navLinks) {
+        navToggle.addEventListener("click", (e) => {
+            e.stopPropagation();
+            navLinks.classList.toggle("open");
+        });
+        
+        document.addEventListener("click", (e) => {
+            if (!nav.contains(e.target)) {
+                navLinks.classList.remove("open");
+            }
+        });
+        
+        navLinks.querySelectorAll(".navLink").forEach(link => {
+            link.addEventListener("click", () => {
+                navLinks.classList.remove("open");
+            });
+        });
+    }
+});
+
 
 
 // ==========================================
@@ -159,7 +184,7 @@ const interviewData = [
         name: "Dhanika Perera",
         title: "Tech Innovator & Entrepreneur",
         issue: "Issue 7",
-        image: "Resources/dhanika.jpg",
+        image: "/Resources/Exposition - University Magazine_files/dhanika perera.png",
         isHighlighted: true,
         tags: ["Entrepreneurship", "Tech Innovation"],
         quote: "Disrupting ecosystems through digital engineering platforms.",
@@ -168,7 +193,7 @@ const interviewData = [
         name: "Deepal Sooriyaarachchi",
         title: "Leading Corporate Leader",
         issue: "Issue 0",
-        image: "Resources/deepal.jpg",
+        image: "/Resources/Exposition - University Magazine_files/deepal sooriyarachchi.png",
         isHighlighted: false,
         tags: ["Leadership", "Strategy"],
         quote: "Sustaining corporate governance in a volatile market.",
@@ -204,7 +229,7 @@ const interviewData = [
         name: "Mr. Ksun Kalhara",
         title: "Musician",
         issue: "Issue 2",
-        image: "Resources/kasun.jpg",
+        image: "/Resources/Exposition - University Magazine_files/kasun.png",
         isHighlighted: true,
         tags: ["Music", "Aesthetics"],
         quote: "Musician blending traditional and contemporary Sri Lankan sounds.",
@@ -596,42 +621,42 @@ document.addEventListener("DOMContentLoaded", () => {
             tagline: "Cyber Security & AI Policy Leader",
             subtext: "Educator & Global Speaker",
             quote: "Had an amazing time at the event organized by University of Kelaniya Management and Information Technology Students. As a panelist discussing 'Data Democracy: Empowering Individuals in the Digital Age,' our discussion highlighted crucial topics around data democratization and universal access. It was an important forum that effectively addressed the challenges and opportunities we face in navigating the digital age, demonstrating how empowering individuals with data can help organizations gain competitive advantage.",
-            image: "images/asela.jpg"
+            image: "/Resources/Exposition - University Magazine_files/asela.jpeg"
         },
         {
             name: "Mr. Deepal Sooriyarachchi",
             tagline: "Former Managing Director of AVIVA N...",
             subtext: "Management Consultant & Author",
             quote: "For me being part of Exposition 20 was truly a privilege. The meticulous planning and flawless execution by the University of Kelaniya undergraduates of the exposition layout process left a professional impression on all attendees involved.",
-            image: "images/deepal.jpg"
+            image: "/Resources/Exposition - University Magazine_files/deepal sooriyarachchi.png"
         },
         {
             name: "Prof. Roshan G. Ragel",
             tagline: "Senior Lecturer , University of Perade...",
             subtext: "CEO, LEARN",
             quote: "It was a pleasure to be part of the Exposition Issue 20 Industrial Forum. The session was well-curated, with an engaging moderator and insightful panel discussions tackling industrial milestones realistically.",
-            image: "images/roshan.jpg"
+            image: "/Resources/Exposition - University Magazine_files/ProfRagel-Photo4-1.jpg"
         },
         {
             name: "Mr. Thusara Rathnaweera",
             tagline: "Deputy General Manager",
             subtext: "Head of MX Biz @ Samsumg Sri Lanka",
             quote: "The event was organized with professional standards, showcasing the exceptional commitment of University of Kelaniya students. As a guest speaker, I witnessed profound technical acumen and operational coordination.",
-            image: "images/thusara.jpg"
+            image: "/Resources/Exposition - University Magazine_files/thushara.jpeg"
         },
         {
             name: "Mr. Kosala Weerasena",
             tagline: "Former Deputy General Manager @ S...",
             subtext: "Charted Telecom Engineer",
             quote: "Impressed with the talents of undergraduates (belonging to Department of Industrial Management, Faculty of Science, University of Kelaniya) exhibited during the event execution pipelines and corporate technical tracks.",
-            image: "images/kosala.jpg"
+            image: "/Resources/Exposition - University Magazine_files/kosala.png"
         },
         {
             name: "Mrs. Kanchana Priyakantha",
             tagline: "Co-Founder & CEO of KReader",
             subtext: "Director / Co-Founder of KBooks",
             quote: "The meticulous planning, festive atmosphere, and adept use of technology were truly commendable. From leadership to presentations, the organizing team managed delivery standards beautifully.",
-            image: "images/kanchana.jpg"
+            image: "/Resources/Exposition - University Magazine_files/kanchana priyakantha.jpg"
         }
     ];
 
@@ -801,7 +826,7 @@ document.addEventListener("DOMContentLoaded", () => {
         {
             name: "GTN",
             tier: "gold",
-            logo: "images/partners/gtn.png"
+            logo: "/Resources/Exposition - University Magazine_files/GTN Logo_2025-BAwawNw1.png"
         },
         {
             name: "Celsius IT",
@@ -997,4 +1022,153 @@ document.addEventListener("DOMContentLoaded", () => {
     updateCardPositions();
     updateData(stack.lastElementChild);
     startAutoPlay();
+});
+
+/**
+ * ========================================================================
+ * HYBRID AUTO/MANUAL SQUARE SCATTER CONTROL ENGINE
+ * ========================================================================
+ */
+document.addEventListener("DOMContentLoaded", () => {
+  const pile = document.getElementById("deckPile");
+  if (!pile) return;
+
+  const cards = Array.from(pile.querySelectorAll(".deck-card"));
+  const totalCards = cards.length;
+  
+  let activeIndex = 0;
+  let autoLoopInterval = null;
+  const loopDelayDuration = 4000; // Time in milliseconds between auto-rotations (4 seconds)
+
+  // Typography Panel Selectors
+  const counterEl = document.getElementById("infoCounter");
+  const tagEl = document.getElementById("infoTag");
+  const titleEl = document.getElementById("infoTitle");
+  const categoryEl = document.getElementById("infoCategory");
+  const infoPanel = document.querySelector(".deck-info-panel");
+
+  // Pre-calculate spatial coordinate vectors radiating outwards from center boundaries
+  const scatterCoordinatesMap = cards.map((_, index) => generatePeripheralCoordinates(index));
+
+  function generatePeripheralCoordinates(index) {
+    // Generates rotation bounds (-30deg to 30deg)
+    const angleRotation = Math.random() * 60 - 30;
+    
+    // Alternates left and right placement vectors across odd/even indexes
+    const polarDirection = index % 2 === 0 ? -1 : 1;
+    
+    // Throws elements outward into the workspace frame relative to the center pile
+    const isMobile = window.innerWidth < 768;
+    const baseDisplacement = isMobile ? 80 : 220;
+    const randomDisplacement = isMobile ? 40 : 80;
+    const horizontalDisplacement = (Math.random() * randomDisplacement + baseDisplacement) * polarDirection; // Pushed safely out left/right
+    const verticalDisplacement = isMobile ? (Math.random() * 100 - 50) : (Math.random() * 200 - 100); // Random heights
+
+    return { 
+      x: `${horizontalDisplacement}px`, 
+      y: `${verticalDisplacement}px`, 
+      r: `${angleRotation}deg` 
+    };
+  }
+
+  function renderGalleryCycle() {
+    cards.forEach((card, i) => {
+      // Wash previous structural parameters clean
+      card.classList.remove("state-bundled", "state-active", "state-scattered");
+      card.removeAttribute("style");
+
+      if (i === activeIndex) {
+        // Condition 1: Center Front Facing Active Card Focus
+        card.classList.add("state-active");
+      } 
+      else if (i < activeIndex) {
+        // Condition 2: Played historical card elements remaining visible around the perimeter
+        const coordinateMetrics = scatterCoordinatesMap[i];
+        card.style.setProperty("--scatter-x", coordinateMetrics.x);
+        card.style.setProperty("--scatter-y", coordinateMetrics.y);
+        card.style.setProperty("--scatter-r", coordinateMetrics.r);
+        card.style.setProperty("--scatter-idx", i);
+        card.classList.add("state-scattered");
+      } 
+      else {
+        // Condition 3: Unplayed elements stacked cleanly inside the center bundle framework
+        const layerStackDepth = i - activeIndex;
+        card.style.setProperty("--stack-offset", layerStackDepth);
+        card.classList.add("state-bundled");
+      }
+    });
+
+    syncMetadataView();
+  }
+
+  function syncMetadataView() {
+    const currentActiveCard = cards[activeIndex];
+    if (!currentActiveCard) return;
+
+    if (infoPanel) infoPanel.classList.add("text-changing");
+
+    // Clean typographic swap out timeline hook
+    setTimeout(() => {
+      if (counterEl) counterEl.textContent = `${activeIndex + 1}/${String(totalCards).padStart(2, '0')}`;
+      if (tagEl) tagEl.textContent = currentActiveCard.getAttribute("data-tag");
+      if (titleEl) titleEl.textContent = currentActiveCard.getAttribute("data-title");
+      if (categoryEl) categoryEl.textContent = currentActiveCard.getAttribute("data-category");
+      
+      if (infoPanel) infoPanel.classList.remove("text-changing");
+    }, 200);
+  }
+
+  function stepNext() {
+    if (activeIndex < totalCards - 1) {
+      activeIndex++;
+    } else {
+      // Infinite Wrap-Around Reset Boundary
+      activeIndex = 0;
+      // Re-scramble scattering map vectors to offer structural variance upon new loop start
+      cards.forEach((_, idx) => scatterCoordinatesMap[idx] = generatePeripheralCoordinates(idx));
+    }
+    renderGalleryCycle();
+  }
+
+  function stepPrev() {
+    if (activeIndex > 0) {
+      activeIndex--;
+    } else {
+      // Wrap backward cleanly to the final array element index position
+      activeIndex = totalCards - 1;
+    }
+    renderGalleryCycle();
+  }
+
+  // Automated Timeline Rotator Logic
+  function startAutomatedLoop() {
+    autoLoopInterval = setInterval(stepNext, loopDelayDuration);
+  }
+
+  function resetAutomatedLoop() {
+    clearInterval(autoLoopInterval);
+    startAutomatedLoop(); // Refreshes interval clock completely upon manual user injection
+  }
+
+  // Intercept Navigation Button Targets
+  const btnNext = document.getElementById("deckNext");
+  const btnPrev = document.getElementById("deckPrev");
+
+  if (btnNext) {
+    btnNext.addEventListener("click", () => {
+      stepNext();
+      resetAutomatedLoop();
+    });
+  }
+
+  if (btnPrev) {
+    btnPrev.addEventListener("click", () => {
+      stepPrev();
+      resetAutomatedLoop();
+    });
+  }
+
+  // Mount/Initialization Lifecycle Hooks
+  renderGalleryCycle();
+  startAutomatedLoop();
 });

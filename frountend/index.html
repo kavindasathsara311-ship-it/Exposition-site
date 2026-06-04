@@ -2,13 +2,13 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Elegant serif font for titles and clean sans-serif for content -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <!-- Elegant serif font for titles and clean sans-serif for content -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+        <link rel="stylesheet" href="style.css">
         <title>Exposition</title>
         <link rel="stylesheet" href="styles.css">
     </head>
@@ -16,13 +16,18 @@
         <section class="homePage">
             <nav class="navbar">
                 <img src="/Resources/ExpoLogo.png" class="nav-logo" alt="expo logo"/>
-                <a class="navLink" href="#home">Home</a>
-                <a class="navLink" href="#about">About</a>
-                <a class="navLink" href="#services">Services</a>
-                <a class="navLink" href="#portfolio">Portfolio</a>
-                <a class="navLink" href="#portfolio">Highlights</a>
-                <a class="navLink" href="#portfolio">CommunityVoice</a>
-                <a class="navLink" href="#contact">Contact</a>
+                <div class="nav-toggle" id="navToggle">
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+                <div class="nav-links" id="navLinks">
+                    <a class="navLink" href="#home">Home</a>
+                    <a class="navLink" href="#about">About</a>
+                    <a class="navLink" href="#services">Services</a>
+                    <a class="navLink" href="#portfolio">Portfolio</a>
+                    <a class="navLink" href="#portfolio">Highlights</a>
+                    <a class="navLink" href="#portfolio">CommunityVoice</a>
+                    <a class="navLink" href="#contact">Contact</a>
+                </div>
             </nav>
         </section>
 
@@ -164,7 +169,7 @@
             <div class="carousel-stage">
                 <div class="carousel-cylinder" id="cylinder">
                     
-                    <div class="carousel-card" style="--card-index: 0; background-image: url('Resources/expo.jpg');">
+                    <div class="carousel-card" style="--card-index: 0; background-image: url('/Resources/Exposition - University Magazine_files/magazine.png');">
                         <div class="card-overlay">
                             <h3>Exposition Magazine</h3>
                             <p>The core publication theme layout.</p>
@@ -172,7 +177,7 @@
                         </div>
                     </div>
 
-                    <div class="carousel-card" style="--card-index: 1; background-image: url('Resources/interviews.jpg');">
+                    <div class="carousel-card" style="--card-index: 1; background-image: url('/Resources/Exposition - University Magazine_files/Interviews.png');">
                         <div class="card-overlay">
                             <h3>Interviews</h3>
                             <p>Exclusive insights with industry leaders.</p>
@@ -181,7 +186,7 @@
                     </div>
 
                     <!-- Card 3: Industrial Week -->
-                    <div class="carousel-card" style="--card-index: 2; background-image: url('Resources/industrial.jpg');">
+                    <div class="carousel-card" style="--card-index: 2; background-image: url('/Resources/Exposition - University Magazine_files/pexels-photo-3183197.jpeg');">
                         <div class="card-overlay">
                             <h3>Industrial Week</h3>
                             <p>Exploring operational ecosystems.</p>
@@ -190,7 +195,7 @@
                     </div>
 
                     <!-- Card 4: Edify -->
-                    <div class="carousel-card" style="--card-index: 3; background-image: url('Resources/edify.jpg');">
+                    <div class="carousel-card" style="--card-index: 3; background-image: url('/Resources/Exposition - University Magazine_files/Edify.png');">
                         <div class="card-overlay">
                             <h3>Edify</h3>
                             <p>Celebrating synergy between academia and industry.</p>
@@ -199,8 +204,8 @@
                     </div>
 
                     <!-- Card 5: How You Did It -->
-                    <div class="carousel-card" style="--card-index: 4; background-image: url('Resources/how.jpg');">
-                        <div class="card-overlay">
+                    <div class="carousel-card" style="--card-index: 4; background-image: url('/Resources/Exposition - University Magazine_files/howYouDidIt.png');">
+                        <div class="card-overlay How-You-Did-It">
                             <h3>How You Did It</h3>
                             <p>Inspiring sessions where mentors share career journeys.</p>
                             <button class="explore-btn">Explore More</button>
@@ -208,7 +213,7 @@
                     </div>
 
                     <!-- Card 6: Workshops -->
-                    <div class="carousel-card" style="--card-index: 5; background-image: url('Resources/workshops.jpg');">
+                    <div class="carousel-card" style="--card-index: 5; background-image: url('/Resources/Exposition - University Magazine_files/pexels-photo-3183197.jpeg');">
                         <div class="card-overlay">
                             <h3>Student Workshops</h3>
                             <p>Interactive, skill-building workshops for practical knowledge.</p>
@@ -217,7 +222,7 @@
                     </div>
 
                     <!-- Card 7: Industrial Forum -->
-                    <div class="carousel-card" style="--card-index: 6; background-image: url('Resources/forum.jpg');">
+                    <div class="carousel-card" style="--card-index: 6; background-image: url('/Resources/Exposition - University Magazine_files/forum.png');">
                         <div class="card-overlay">    
                             <h3>Industrial Forum</h3>
                             <p>Debating tech integration strategies.</p>
@@ -226,7 +231,7 @@
                     </div>
 
                     <!-- Card 8: Career Fair -->
-                    <div class="carousel-card" style="--card-index: 7; background-image: url('Resources/career.jpg');">
+                    <div class="carousel-card" style="--card-index: 7; background-image: url('/Resources/Exposition - University Magazine_files/pexels-photo-5989933.jpg');">
                         <div class="card-overlay">
                             <h3>Career Fair</h3>
                             <p>Connecting emerging talents with elite enterprises.</p>
@@ -490,7 +495,113 @@
             </div>
         </section>
 
+            <svg style="position: absolute; width: 0; height: 0; aria-hidden: true;">
+                <filter id="deck-grain">
+                    <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="3" stitchTiles="stitch" />
+                    <feColorMatrix type="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 0.04 0" />
+                </filter>
+            </svg>
+
+            <section class="deck-gallery-section">
+                <div class="deck-container-frame">
+                    
+                    <div class="deck-workspace">
+                        <div class="deck-pile" id="deckPile">
+                            
+                            <div class="deck-card" data-index="0" data-title="Mountain Peak Extraction" data-category="Nature" data-tag="LOG // 01">
+                                <img src="/Resources/Exposition - University Magazine_files/1.png" alt="Nature Asset">
+                            </div>
+                            
+                            <div class="deck-card" data-index="1" data-title="Neon Grid Highrise" data-category="Urban" data-tag="LOG // 02">
+                                <img src="/Resources/Exposition - University Magazine_files/2.png" alt="Urban Asset">
+                            </div>
+                            
+                            <div class="deck-card" data-index="2" data-title="Cyber Isolation Audit" data-category="Abstract" data-tag="LOG // 03">
+                                <img src="/Resources/Exposition - University Magazine_files/3.png" alt="Abstract Asset">
+                            </div>
+                            
+                            <div class="deck-card" data-index="3" data-title="Rootcode AI Briefing" data-category="People" data-tag="LOG // 04">
+                                <img src="/Resources/Exposition - University Magazine_files/4.png" alt="People Asset">
+                            </div>
+                            
+                            <div class="deck-card" data-index="4" data-title="Sylvan Canopy Recon" data-category="Nature" data-tag="LOG // 05">
+                                <img src="/Resources/Exposition - University Magazine_files/5.png" alt="Nature Asset">
+                            </div>
+
+                            <div class="deck-card" data-index="5" data-title="Monolith Architecture" data-category="Urban" data-tag="LOG // 06">
+                                <img src="/Resources/Exposition - University Magazine_files/6.png" alt="Urban Asset">
+                            </div>
+
+                            <div class="deck-card" data-index="6" data-title="Prismatic Signal Shift" data-category="Abstract" data-tag="LOG // 07">
+                                <img src="/Resources/Exposition - University Magazine_files/7.png" alt="Abstract Asset">
+                            </div>
+
+                            <div class="deck-card" data-index="7" data-title="Tactical Network Node" data-category="Urban" data-tag="LOG // 08">
+                                <img src="/Resources/Exposition - University Magazine_files/8.png" alt="Urban Asset">
+                            </div>
+
+                        </div>
+                        </div>
+
+                        <div class="deck-info-panel">
+                        <div class="info-meta-block">
+                            <div class="info-counter" id="infoCounter">1/08</div>
+                            <div class="info-tag" id="infoTag">LOG // 01</div>
+                            <h2 class="info-title" id="infoTitle">Asset Title</h2>
+                            <span class="info-category" id="infoCategory">Category</span>
+                        </div>
+
+                        <div class="info-controls">
+                            <button class="control-btn" id="deckPrev" aria-label="Previous Asset">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="15 18 9 12 15 6"/></svg>
+                            </button>
+                            <button class="control-btn" id="deckNext" aria-label="Next Asset">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="9 18 15 12 9 6"/></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </section>
+
+        <footer class="site-footer">
+            <div class="footer-content">
+                <div class="footer-container-main">
+                    <img src="/Resources/Exposition - University Magazine_files/Expo logo.svg" alt="Exposition Magazine Logo" class="footer-logo">
+                    <p class="footer-para">Celebrating academic excellence through compelling storytelling and meaningful partnerships.</p>
+                    <img src="/Resources/Exposition - University Magazine_files/unilogos.png" alt="University Logos" class="footer-unilogos">
+
+                    <p>&copy; 2024 Exposition Magazine. All rights reserved.</p>
+                </div>
+                <div class="footer-container">
+                    <p class="footer-quick-link">Quick Links</p>
+                    <a href="">Events</a>
+                    <a href="">Event Structure</a>
+                    <a href="">Partnerships</a>
+                    <a href="">Contact Us</a>
+                </div>
+                <div class="footer-container">
+                    <p class="footer-quick-link">Get in Touch</p>
+                    <a href=""><i class="fa fa-location"></i>  University of Kelaniya, Sri Lanka</a>
+                    <a href=""><i class="fa-solid fa-phone"></i> +94 71 684 6120</a>
+                    <a href=""><i class="fa-solid fa-envelope"></i> exposition.uok@gmail.com</a>
+                    
+                    <p class="footer-quick-link">Follow Us</p>
+                    <div class="social_link-container">
+                        <a href="https://web.facebook.com/Exposition.MIT?_rdc=1&_rdr#">
+                            <i class="fa-brands fa-facebook social_link"></i>
+                        </a>
+                        <a href="">
+                            <i class="fa-brands fa-linkedin social_link"></i>
+                        </a>
+                        <a href="">
+                            <i class="fa-brands fa-instagram social_link"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </footer>
         <script src="script.js"></script>
-        
     </body>
 </html>
