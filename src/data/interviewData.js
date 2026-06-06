@@ -20,37 +20,37 @@ export const interviewData = [
     company: "Strategic Perspectives"
   },
   {
-    name: "Danik Perera",
+    name: "Peter De Almeida",
     title: "Tech Innovator & Entrepreneur",
     issue: "Issue 17",
-    image: "Resources/dhanika.jpg",
+    image: "/Resources/Exposition - University Magazine_files/peterdealmeida.png",
     isHighlighted: true,
     tags: ["Entrepreneurship", "Tech Innovation"],
     quote: "Disrupting ecosystems through digital engineering platforms.",
     company: "Bhasha"
   },
   {
-    name: "Sushena Rananga",
+    name: "W.K.H. Wegapitiya",
     title: "Technology Leader & Innovation Specialist",
     issue: "Issue 15",
-    image: "Resources/sushena.jpg",
+    image: "/Resources/Exposition - University Magazine_files/PWH.lk-CC0bYq1W.jpg",
     isHighlighted: true,
     tags: ["Technology Leadership", "Digital Innovation", "Industry 4.0"],
     quote: "Leading technological advancement and digital transformation initiatives across industries.",
     company: "Director/Co-founder at Creative Software"
   },
   {
-    name: "Dhanik Perera",
+    name: "Dian Gomes",
     title: "Tech Innovator & Entrepreneur",
     issue: "Issue 78",
-    image: "Resources/dhanika.jpg",
+    image: "/Resources/Exposition - University Magazine_files/dian gomez.png",
     isHighlighted: true,
     tags: ["Entrepreneurship", "Tech Innovation"],
     quote: "Disrupting ecosystems through digital engineering platforms.",
     company: "Bhasha"
   },
   {
-    name: "Mr. Ksun Kalhara",
+    name: "Mr. Kasun Kalhara",
     title: "Musician",
     issue: "Issue 2",
     image: "/Resources/Exposition - University Magazine_files/kasun.png",
@@ -60,7 +60,7 @@ export const interviewData = [
     company: "Independent Artist"
   },
   {
-    name: "Susena Ratunga",
+    name: "Sushena Ranatunga",
     title: "Technology Leader & Innovation Specialist",
     issue: "Issue 15",
     image: "Resources/sushena.jpg",
@@ -70,7 +70,7 @@ export const interviewData = [
     company: "Director/Co-founder at Creative Software"
   },
   {
-    name: "Depal Soriyaarachchi",
+    name: "Meril Fernando",
     title: "Leading Corporate Leader",
     issue: "Issue 20",
     image: "Resources/deepal.jpg",
@@ -80,7 +80,7 @@ export const interviewData = [
     company: "Strategic Perspectives"
   },
   {
-    name: "S Ratunga",
+    name: "Lakmini Wijesundara",
     title: "Technology Leader & Innovation Specialist",
     issue: "Issue 15",
     image: "Resources/sushena.jpg",

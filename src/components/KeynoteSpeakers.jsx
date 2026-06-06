@@ -156,7 +156,7 @@ export default function KeynoteSpeakers() {
         >
           {uniqueInterviewData.map((person, idx) => (
             <div key={idx} className="grid-card">
-              <div className="card-img-wrapper">
+              <div className="card-img-wrapper" >
                 <img src={person.image} alt={person.name} />
                 <span className="badge-tag">{person.issue}</span>
               </div>

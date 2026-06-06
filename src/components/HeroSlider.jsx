@@ -37,6 +37,7 @@ export default function HeroSlider() {
           style={{ backgroundImage: `url("${slide.image}")` }}
         >
           <div className="slide-content">
+            <img src="public/Resources/ExpoLogo.png" className="hero-expologo"></img>
             <h2 className="slide-title">{slide.title}</h2>
             <p className="slide-subtitle">{slide.subtitle}</p>
           </div>
