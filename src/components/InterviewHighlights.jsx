@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import { uniqueInterviewData } from "../data/interviewData";
+import { interviewHighlightsData } from "../data/interviewData";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
 
 export default function InterviewHighlights() {
@@ -11,7 +11,7 @@ export default function InterviewHighlights() {
   const sectionRef = useRef(null);
   useScrollAnimation(sectionRef, "animate-in");
 
-  const highlights = uniqueInterviewData.filter((person) => person.isHighlighted);
+  const highlights = interviewHighlightsData;
 
   useEffect(() => {
     const track = trackRef.current;
@@ -96,8 +96,10 @@ export default function InterviewHighlights() {
             <div key={idx} className="row-card">
               <img src={person.image} alt={person.name} className="row-card-img" />
               <div className="row-card-content">
-                <span className="badge-tag">{person.issue}</span>
-                <h3>{person.name}</h3>
+                <div className="row-card-header">
+                  <h3>{person.name}</h3>
+                  <span className="card-badge">{person.issue}</span>
+                </div>
                 <span className="role-sub">{person.title}</span>
                 <p className="short-quote">"{person.quote}"</p>
               </div>

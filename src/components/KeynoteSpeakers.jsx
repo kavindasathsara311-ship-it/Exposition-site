@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { uniqueInterviewData } from "../data/interviewData";
+import { keynoteSpeakersData } from "../data/interviewData";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
 
 export default function KeynoteSpeakers() {
@@ -19,7 +19,7 @@ export default function KeynoteSpeakers() {
   // Autoplay loop
   useEffect(() => {
     const interval = setInterval(() => {
-      const total = uniqueInterviewData.length;
+      const total = keynoteSpeakersData.length;
       if (total === 0) return;
       const nextIndex = (activeIndex + 1) % total;
 
@@ -46,7 +46,7 @@ export default function KeynoteSpeakers() {
   }, [activeIndex]);
 
   const rotateSpotlight = (direction) => {
-    const total = uniqueInterviewData.length;
+    const total = keynoteSpeakersData.length;
     if (total === 0) return;
     const newIndex = (activeIndex + direction + total) % total;
 
@@ -67,18 +67,18 @@ export default function KeynoteSpeakers() {
     }
   };
 
-  if (uniqueInterviewData.length === 0) return null;
+  if (keynoteSpeakersData.length === 0) return null;
 
-  const spotlightLeader = uniqueInterviewData[activeIndex];
+  const spotlightLeader = keynoteSpeakersData[activeIndex];
 
   // Calculate circular array loops for issues ticker
-  const totalItems = uniqueInterviewData.length;
+  const totalItems = keynoteSpeakersData.length;
   const prevIdx = (displayedIndex - 1 + totalItems) % totalItems;
   const nextIdx = (displayedIndex + 1) % totalItems;
 
-  const prevIssue = uniqueInterviewData[prevIdx].issue;
-  const currentIssue = uniqueInterviewData[displayedIndex].issue;
-  const nextIssue = uniqueInterviewData[nextIdx].issue;
+  const prevIssue = keynoteSpeakersData[prevIdx].issue;
+  const currentIssue = keynoteSpeakersData[displayedIndex].issue;
+  const nextIssue = keynoteSpeakersData[nextIdx].issue;
 
   return (
     <>
@@ -154,15 +154,17 @@ export default function KeynoteSpeakers() {
           className={`leaders-grid ${isExpanded ? "expanded" : ""}`}
           id="leadersGridContainer"
         >
-          {uniqueInterviewData.map((person, idx) => (
+          {keynoteSpeakersData.map((person, idx) => (
             <div key={idx} className="grid-card">
-              <div className="card-img-wrapper" >
+              <div className="card-img-wrapper">
                 <img src={person.image} alt={person.name} />
-                <span className="badge-tag">{person.issue}</span>
               </div>
               <div className="card-info">
                 <h3>{person.name}</h3>
-                <p>{person.title}</p>
+                <p className="speaker-title">{person.title}</p>
+                <div className="card-badges">
+                  <span className="card-badge">{person.issue}</span>
+                </div>
               </div>
             </div>
           ))}

@@ -12,6 +12,7 @@ import OCTeamStack from "./components/OCTeamStack";
 import DeckGallery from "./components/DeckGallery";
 import ContactModal from "./components/ContactModal";
 import Footer from "./components/Footer";
+import GlobalCanvasBackground from "./components/GlobalCanvasBackground";
 
 export default function App() {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
@@ -21,13 +22,16 @@ export default function App() {
 
   return (
     <>
-      {/* Home Section enclosing Hero Slider and Navbar */}
+      {/* Background layer stays completely fixed behind the UI flow */}
+      <GlobalCanvasBackground />
+
+      {/* Home Hero Screen Layout Section */}
       <section className="homePage" id="home">
         <HeroSlider />
         <Navbar />
       </section>
 
-      {/* Main Sections in visual page order */}
+      {/* Main Feature Sections Grid Flow */}
       <Timeline />
       
       <EventCarousel />
@@ -47,10 +51,10 @@ export default function App() {
       <WantToBeFeaturied type="partner" onOpenModal={openModal} />
       
       <DeckGallery />
-      
+
       <Footer />
 
-      {/* Contact Overlay Modal */}
+      {/* Overlays / Portals */}
       <ContactModal isOpen={isContactModalOpen} onClose={closeModal} />
     </>
   );

@@ -106,6 +106,17 @@ export const uniqueInterviewData = interviewData.filter((value, index, self) =>
   self.findIndex(item => item.name === value.name) === index
 );
 
+// Separate Unique Keynote Speakers Dataset (used exclusively for Keynote Speakers component)
+export const keynoteSpeakersData = uniqueInterviewData.filter(person => 
+  ["Dhanika Perera", "Deepal Sooriyaarachchi", "Peter De Almeida", "Dian Gomes", "Mr. Kasun Kalhara"].includes(person.name)
+);
+
+// Separate Unique Interview Highlights Dataset (used exclusively for Interview Highlights component)
+export const interviewHighlightsData = uniqueInterviewData.filter(person => 
+  ["W.K.H. Wegapitiya", "Sushena Ranatunga", "Meril Fernando", "Lakmini Wijesundara", "Susena Ra"].includes(person.name)
+);
+
+
 export const voicesData = [
   {
     name: "Mr. Asela Waidyalankara",

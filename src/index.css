@@ -38,13 +38,30 @@ html, body {
     padding-bottom: 0 !important;
 }
 
+/* ─── Global Base Setup ───────────────────────────────────── */
 body {
-    width: 100vw;
-    background: radial-gradient(circle at center, #162436 0%, #070b12 100%);    background-attachment: fixed;
-    font-family: var(--font-sans);
+    background-color: #030712;
     color: var(--text-main);
-    overflow-x: hidden;
-    padding-bottom: 40px; /* Reduced bottom space */
+    overflow: hidden;
+    margin: 0;
+}
+
+/* Subtle GPU-accelerated dotted grid overlay layer behind the canvas */
+body::before {
+    content: '';
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: 
+        radial-gradient(rgba(0, 255, 200, 0.03) 1px, transparent 1px),
+        radial-gradient(rgba(234, 161, 27, 0.02) 1px, transparent 1px);
+    background-size: 60px 60px;
+    background-position: 0 0, 30px 30px;
+    opacity: 1;
+    z-index: -2;          /* Behind canvas overlay */
+    pointer-events: none; /* Mouse movements pass through to interactive canvas */
 }
 
 .navbar {
@@ -371,8 +388,9 @@ section{
 }
 
 .content-box:hover {
-    border-color: rgba(191, 164, 115, 0.4);
-    transform: translateY(-1px);
+    border-color: var(--gold-accent);
+    transform: translateY(-3px);
+    box-shadow: 0 10px 30px rgba(174, 138, 79, 0.15), 0 0 20px rgba(174, 138, 79, 0.08);
 }
 
 .timeline-item.left .content-box { text-align: right; }
@@ -455,218 +473,482 @@ section{
 }
 
 /* 3D Camera Environment Setup */
-.carousel-stage {
-    width: 100%;
+/* ─── Holographic Carousel ────────────────────────────────── */
+
+.holo-section {
     position: relative;
-    max-width: 1200px;
-    height: 450px;
-    perspective: 1200px; /* Sets camera depth focal distance */
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: grab;
-    user-select: none;
-    touch-action: pan-y;
-}
-
-.carousel-stage.dragging {
-    cursor: grabbing;
-}
-
-.carousel-cylinder {
-    position: relative;
-    width: var(--carousel-card-width);  
-    height: var(--carousel-card-height);
-    transform-style: preserve-3d;
-    transition: transform 0.8s cubic-bezier(0.25, 0.8, 0.25, 1);
-}
-
-.carousel-card {
-    position: absolute;
-    width: var(--carousel-card-width); 
-    height: var(--carousel-card-height); 
-    left: 0;
-    top: 0;
-    border-radius: 16px;
-    background-size: cover;
-    background-position: center;
-    border: 1px solid rgba(146, 121, 80, 0.3);
-    box-shadow: 0 12px 30px rgba(0,0,0,0.6);
-    overflow: hidden;
-    backface-visibility: hidden; 
-    transition: transform 1.25s cubic-bezier(0.25, 0.8, 0.25, 1), filter 0.5s ease-in-out;
-    transform: rotateY(calc(var(--card-index) * 45deg)) translateZ(var(--carousel-translate-z));
-}
-
-.card-overlay {
-    position: absolute;
-    bottom: 0;
-    width: 100%;
-    height: 50%; 
-    background: linear-gradient(to top, rgba(11, 18, 28, 0.95) 75%, rgba(11, 18, 28, 0));
-    padding: 20px;
+    width: 100vw;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    box-sizing: border-box;
-}
-
-.card-overlay h3 {
-    font-family: var(--font-serif);
-    color: #ffffff;
-    font-size: 1.25rem;
-    margin-bottom: 8px;
-    letter-spacing: 0.5px;
-}
-
-.card-overlay p {
-    font-size: 0.8rem;
-    color: #b8c5d6;
-    line-height: 1.4;
-    margin-bottom: 15px;
-    font-weight: 300;
-}
-
-/* Premium Gold-Bronze Explore Button matching image_d88784.jpg exactly */
-.explore-btn {
-    background: linear-gradient(135deg, var(--gold-accent) 0%, var(--gold-bright) 100%);
-    color: #070b12;
-    border: none;
-    padding: 10px 15px;
-    font-size: 0.85rem;
-    font-weight: bold;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    width: 100%;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-}
-
-.explore-btn:hover {
-    transform: scale(1.02);
-    box-shadow: 0 0 15px rgba(191, 164, 113, 0.4);
-}
-
-/* Navigation indicators arrangement styling */
-.carousel-nav-dots {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 15px;
-    margin-top: 15vh;
-    z-index: 10;
-    flex-wrap: wrap;
-    max-width: 90%;
-}
-
-.nav-arrow {
-    background: rgba(25, 34, 48, 0.6);
-    border: 1px solid var(--gold-accent);
-    color: var(--gold-bright);
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    cursor: pointer;
-    font-size: 1.15rem;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.3s ease;
-}
-
-.left-arrow { left: 40px; }
-.right-arrow { right: 40px; }
-
-.nav-arrow:hover {
-    background: var(--gold-accent);
-    color: #070b12;
-}
-
-.dot {
-    font-size: 1rem;
-    color: rgba(184, 197, 214, 0.4);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    padding: 5px 10px;
-    border-radius: 20px;
-    position: relative;
-    margin: 0;
-}
-
-.dot::before {
-    content: '○';
-    display: block;
-    text-align: center;
-    margin-bottom: 2px;
-    font-size: 1rem;
-}
-
-.dot.active {
-    color: var(--gold-bright);
-    font-weight: bold;
-}
-
-.dot.active::before {
-    content: '●';
-    color: var(--gold-bright);
-}
-
-.autoplay-controls {
-    display: flex;
     align-items: center;
     justify-content: center;
-    gap: 12px;
-    margin-top: 30px;
-    z-index: 10;
+    overflow: hidden;
+    background: transparent; /* Changed to transparent to let the global canvas shine through */
 }
 
-.playback-btn {
-    background: rgba(25, 34, 48, 0.45);
-    border: 1px solid rgba(146, 121, 80, 0.3);
-    color: #b8c5d6;
-    padding: 8px 24px;
-    border-radius: 30px;
-    font-family: var(--font-sans);
-    font-size: 0.9rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(8px);
+/* Canvas background fills the section */
+.holo-canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  pointer-events: none;
 }
 
-.playback-btn:hover {
-    border-color: var(--gold-accent);
-    color: #ffffff;
-    box-shadow: 0 0 10px rgba(174, 138, 79, 0.2);
-}
-.control-icon {
-    font-size: 0.75rem;
-    color: var(--text-main);
-}
-.status-indicator-dot {
-    width: 8px;
-    height: 8px;
-    background-color: var(--gold-bright);
-    border-radius: 50%;
-    box-shadow: 0 0 8px var(--gold-bright);
-    transition: background-color 0.3s ease;
-}
-.playback-btn.paused-state {
-    border-color: rgba(184, 197, 214, 0.2);
+.global-holo-canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    z-index: -1;          /* Locks it securely beneath all page content layers */
+    pointer-events: none; /* Crucial: clicks/hovers pass right through to your buttons and forms */
 }
 
-.playback-btn.paused-state + .status-indicator-dot {
-    background-color: rgba(184, 197, 214, 0.3);
-    box-shadow: none;
+/* All content sits above canvas */
+.holo-root {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 2.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
 }
 
-.keynoteSpeaker{
-    margin-top: 20vh;
+/* ─── HUD bar ────────────────────────────────────────────── */
+.holo-hud-bar {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 0.5rem;
 }
 
+.holo-hud-label {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  color: rgba(255, 255, 255, 0.28);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.holo-hud-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(0, 255, 200, 0.12), transparent);
+}
+
+.holo-hud-counter {
+  font-size: 11px;
+  letter-spacing: 0.12em;
+  color: rgba(255, 255, 255, 0.45);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* ─── Stage ──────────────────────────────────────────────── */
+.holo-stage {
+  position: relative;
+  width: 100%;
+  height: 430px;
+  perspective: 1400px;
+  perspective-origin: 50% 45%;
+  cursor: grab;
+  user-select: none;
+  touch-action: pan-y;
+}
+
+.holo-stage:active {
+  cursor: grabbing;
+}
+
+.holo-track {
+  position: absolute;
+  inset: 0;
+  transform-style: preserve-3d;
+}
+
+/* ─── Cards ──────────────────────────────────────────────── */
+.holo-card {
+  position: absolute;
+  width: 260px;
+  height: 360px;
+  top: 50%;
+  left: 50%;
+  border-radius: 18px;
+  overflow: visible;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  will-change: transform, opacity;
+  transition: transform 0.75s cubic-bezier(0.76, 0, 0.24, 1),
+              opacity 0.55s ease;
+}
+
+.holo-card-inner {
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+.holo-card-media {
+  width: 100%;
+  height: 60%;
+  position: relative;
+  overflow: hidden;
+  background: #08090f;
+}
+
+/* Real image fills the card media area */
+.holo-card-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  transition: transform 0.6s ease;
+  user-select: none;
+  -webkit-user-drag: none;
+}
+
+/* Subtle zoom on active card */
+.holo-card.active .holo-card-img {
+  transform: scale(1.05);
+}
+
+/* Colour accent tint layered over image */
+.holo-card-img-tint {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Smooth gradient from image into card body */
+.holo-card-media::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 40%;
+  background: linear-gradient(to bottom, transparent, rgba(3,7,18,0.85));
+  pointer-events: none;
+  z-index: 2;
+}
+
+/* Scanline effect — only on active card */
+.holo-card-scan {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent,
+    transparent 3px,
+    rgba(0, 255, 200, 0.015) 3px,
+    rgba(0, 255, 200, 0.015) 4px
+  );
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.holo-card.active .holo-card-scan {
+  opacity: 1;
+}
+
+.holo-card-glare {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 30% 20%, rgba(255, 255, 255, 0.07) 0%, transparent 60%);
+  pointer-events: none;
+  border-radius: 18px;
+}
+
+.holo-card-border {
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  pointer-events: none;
+  transition: border-color 0.4s;
+}
+
+.holo-card.active .holo-card-border {
+  border-color: rgba(0, 255, 200, 0.28);
+}
+
+/* Active cyan glow ring */
+.holo-active-glow {
+  position: absolute;
+  inset: -2px;
+  border-radius: 20px;
+  box-shadow: 0 0 0 1px rgba(0, 255, 200, 0.18),
+              0 0 40px rgba(0, 255, 200, 0.07),
+              0 24px 60px rgba(0, 0, 0, 0.85);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.45s;
+  z-index: -1;
+}
+
+.holo-card.active .holo-active-glow {
+  opacity: 1;
+}
+
+/* Card text overlay */
+.holo-card-data {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.1rem 1.1rem 1.25rem;
+  background: linear-gradient(to top, rgba(3, 7, 18, 0.98) 65%, transparent);
+}
+
+.holo-card-index {
+  font-size: 9px;
+  letter-spacing: 0.24em;
+  color: rgba(0, 255, 200, 0.55);
+  text-transform: uppercase;
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.holo-card-index-line {
+  display: inline-block;
+  width: 16px;
+  height: 1px;
+  background: rgba(0, 255, 200, 0.55);
+  flex-shrink: 0;
+}
+
+.holo-card-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 1.3;
+  margin-bottom: 4px;
+}
+
+.holo-card-sub {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.38);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.holo-explore-btn {
+  background: rgba(0, 255, 200, 0.08);
+  border: 1px solid rgba(0, 255, 200, 0.25);
+  color: rgba(0, 255, 200, 0.8);
+  padding: 7px 14px;
+  font-size: 11px;
+  font-weight: 500;
+  border-radius: 8px;
+  cursor: pointer;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  width: 100%;
+  transition: all 0.25s;
+}
+
+.holo-explore-btn:hover {
+  background: rgba(0, 255, 200, 0.14);
+  color: #00ffc8;
+  border-color: rgba(0, 255, 200, 0.45);
+}
+
+/* Corner bracket markers */
+.holo-corner {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+}
+
+.holo-card.active .holo-corner {
+  opacity: 1;
+}
+
+.holo-cc-tl { top: 10px; left: 10px; }
+.holo-cc-tr { top: 10px; right: 10px; transform: scaleX(-1); }
+.holo-cc-bl { bottom: 10px; left: 10px; transform: scaleY(-1); }
+.holo-cc-br { bottom: 10px; right: 10px; transform: scale(-1); }
+
+/* ─── Navigation ─────────────────────────────────────────── */
+.holo-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.holo-nav-btn {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.65);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  transition: all 0.25s;
+  flex-shrink: 0;
+}
+
+.holo-nav-btn:hover {
+  background: rgba(0, 255, 200, 0.08);
+  border-color: rgba(0, 255, 200, 0.3);
+  color: #00ffc8;
+}
+
+.holo-nav-btn:active {
+  transform: scale(0.92);
+}
+
+/* ─── Ticker ─────────────────────────────────────────────── */
+.holo-ticker {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.holo-tick {
+  width: 24px;
+  height: 2px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  transition: width 0.35s, background 0.35s;
+  position: relative;
+  overflow: hidden;
+}
+
+.holo-tick.active {
+  width: 48px;
+  background: rgba(0, 255, 200, 0.18);
+}
+
+.holo-tick-fill {
+  position: absolute;
+  inset: 0;
+  background: #00ffc8;
+  transform: scaleX(0);
+  transform-origin: left;
+  border-radius: 2px;
+}
+
+.holo-tick-fill.running {
+  animation: holoFillTick 3.8s linear forwards;
+}
+
+@keyframes holoFillTick {
+  to { transform: scaleX(1); }
+}
+
+/* ─── Info strip ─────────────────────────────────────────── */
+.holo-info-strip {
+  width: 100%;
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.holo-info-card {
+  flex: 1;
+  min-width: 100px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 12px;
+  padding: 0.85rem 1rem;
+  transition: all 0.35s cubic-bezier(0.25, 1, 0.2, 1);
+}
+
+.holo-info-card:hover {
+  border-color: rgba(0, 255, 200, 0.3);
+  background: rgba(0, 255, 200, 0.02);
+  box-shadow: 0 5px 20px rgba(0, 255, 200, 0.08), 0 0 15px rgba(0, 255, 200, 0.05);
+  transform: translateY(-2px);
+}
+
+.holo-info-card.lit {
+  border-color: rgba(0, 255, 200, 0.15);
+}
+
+.holo-info-num {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  margin-bottom: 2px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.holo-info-key {
+  font-size: 9px;
+  letter-spacing: 0.14em;
+  color: rgba(255, 255, 255, 0.28);
+  text-transform: uppercase;
+}
+
+/* ─── Command row ────────────────────────────────────────── */
+.holo-cmd-row {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.holo-cmd {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 8px;
+  padding: 5px 16px;
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.3);
+  letter-spacing: 0.06em;
+  cursor: pointer;
+  transition: all 0.25s;
+  user-select: none;
+}
+
+.holo-cmd:hover {
+  border-color: rgba(0, 255, 200, 0.22);
+  color: rgba(0, 255, 200, 0.65);
+  background: rgba(0, 255, 200, 0.04);
+}
+
+.holo-cmd.on {
+  border-color: rgba(0, 255, 200, 0.38);
+  color: #00ffc8;
+  background: rgba(0, 255, 200, 0.06);
+}
+
+/* ─── Responsive ─────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .holo-stage { height: 360px; perspective: 900px; }
+  .holo-card { width: 220px; height: 310px; }
+  .holo-info-strip { gap: 0.5rem; }
+  .holo-info-card { min-width: 70px; padding: 0.65rem 0.75rem; }
+  .holo-info-num { font-size: 14px; }
+}
 
 
 /*--Keynote speaker section styles   */
@@ -678,33 +960,36 @@ section{
 .leaders-grid {
     position: relative;
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-    column-gap: 35px; /* Increased gap */
-    row-gap: 80px; /* Increased row gap to keep hidden rows safely below */
-    max-height: 390px; /* Adjusted to account for new padding and top shift */
-    padding: 20px 20px 40px 20px; /* 40px bottom padding fixes the last card clipping */
-    margin: -20px -20px -20px -20px; /* Offset the padding to maintain layout */
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    column-gap: 35px;
+    row-gap: 40px;
+    max-height: 480px; /* Fits exactly one row of card height + margins */
+    padding: 20px 20px 40px 20px;
+    margin: -20px -20px -20px -20px;
     overflow: hidden;
     transition: max-height 0.8s cubic-bezier(0.25, 1, 0.5, 1);
 }
 .leaders-grid.expanded {
-    max-height: 3500px;
+    max-height: 5000px;
 }
 .grid-card {
     position: relative;
-    background-color: var(--card-bg);
-    border-radius: 12px;
+    background: rgba(15, 23, 42, 0.45); /* Glassmorphic dark card matching background */
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 24px;
     overflow: hidden;
-    border: 1px solid transparent;
-    top: 20px;
-    transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    display: flex;
+    flex-direction: column;
+    height: 420px; /* Fixed height for clean grid alignment */
+    top: 0;
+    transition: all 0.4s cubic-bezier(0.25, 1, 0.3, 1);
 }
-.grid-card:hover{
-    box-shadow: 0 0 15px var(--gold-bright, rgba(234, 161, 27, 0.4));
-    transform: scale(1.05);
-    color: var(--gold-accent);
-    border-color: var(--gold-accent);
-    z-index: 10;
+.grid-card:hover {
+    transform: translateY(-8px) scale(1.02);
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), 0 0 30px rgba(0, 255, 200, 0.04);
 }
 .view-all-btn-container {
     display: flex;
@@ -734,8 +1019,20 @@ section{
 
 }
 .gold-active-border { border-color: var(--gold); box-shadow: 0 0 15px rgba(191,164,115,0.2); }
-.card-img-wrapper { position: relative; width: 100%; height: 220px; background-position: center; background-size: cover; }
-.card-img-wrapper img { width: 100%; height: 100%;  }
+.card-img-wrapper { position: absolute; top: 0; left: 0; width: 100%; height: 100%; overflow: hidden; z-index: 1; }
+.card-img-wrapper img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s cubic-bezier(0.25, 1, 0.3, 1); }
+.grid-card:hover .card-img-wrapper img { transform: scale(1.08); }
+/* Full background gradient overlay to ensure text readability on image background */
+.card-img-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(to bottom, rgba(3, 7, 18, 0.15) 0%, rgba(3, 7, 18, 0.5) 45%, rgba(3, 7, 18, 0.95) 100%);
+    z-index: 2;
+}
 .badge-tag { 
     position: absolute;
     width: 6.5rem; 
@@ -750,9 +1047,21 @@ section{
     border-radius: 20px;
     border: 2px solid var(--gold-accent); 
 }
-.card-info { padding: 15px; }
-.card-info h3 { font-size: 1.1rem; margin-bottom: 5px; color: var(--text-white); }
-.card-info p { font-size: 0.85rem; color: var(--text-gray); }
+.card-info { padding: 20px 24px; display: flex; flex-direction: column; margin-top: auto; position: relative; z-index: 3; text-align: left; }
+.card-info h3 { font-family: var(--font-sans); font-size: 1.2rem; font-weight: 700; color: var(--text-white); margin-bottom: 6px; line-height: 1.3; }
+.speaker-title { font-size: 0.85rem; color: rgba(255, 255, 255, 0.55); line-height: 1.4; margin-bottom: 12px; flex-grow: 1; }
+.card-badges { display: flex; gap: 8px; flex-wrap: wrap; margin-top: auto; }
+.card-badge {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(174, 138, 79, 0.3);
+    color: var(--gold-bright);
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    font-family: var(--font-sans);
+    white-space: nowrap;
+}
 
 
 .highlights-row {
@@ -2112,42 +2421,43 @@ section{
     /* 2-column grid for speakers cards on mobile */
     .leaders-grid {
         grid-template-columns: repeat(2, 1fr) !important;
-        column-gap: 0px !important;
+        column-gap: 15px !important;
         row-gap: 25px !important;
-        padding: 20px !important;
-        max-height: 480px !important;
+        padding: 20px 10px !important;
+        max-height: 460px !important; /* Contain 1 row on mobile */
     }
     .leaders-grid.expanded {
-        max-height: 3500px !important;
+        max-height: 6000px !important;
     }
     .grid-card {
-        width: 85%;
-        margin-left: 25px;
+        width: 100% !important;
+        margin-left: 0px !important;
         top: 0 !important;
+        height: 390px !important;
     }
     .card-img-wrapper {
-        height: 150px !important;
-    }
-    .leaders-grid .badge-tag {
-        position: absolute !important;
-        top: 8px !important;
-        left: 8px !important;
-        right: auto !important;
-        width: auto !important;
-        font-size: 0.75rem !important;
-        padding: 2px 8px !important;
-        border-radius: 12px !important;
-        border-width: 1px !important;
+        height: 100% !important;
     }
     .card-info {
-        padding: 10px !important;
+        padding: 12px 16px !important;
+        margin-top: auto !important;
     }
     .card-info h3 {
-        font-size: 0.9rem !important;
+        font-size: 1.05rem !important;
         line-height: 1.2 !important;
+        margin-bottom: 4px !important;
     }
-    .card-info p {
-        font-size: 0.75rem !important;
+    .speaker-title {
+        font-size: 0.76rem !important;
+        line-height: 1.3 !important;
+        margin-bottom: 8px !important;
+    }
+    .card-badges {
+        margin-top: auto !important;
+    }
+    .card-badge {
+        font-size: 0.7rem !important;
+        padding: 4px 10px !important;
     }
     
     /* Carousel navigation dots wrapping fix */
