@@ -10,6 +10,7 @@ export default function WantToBeFeaturied({ onOpenModal, type = "featured" }) {
       <section
         ref={sectionRef}
         className="want-to-be-featured-section be-a-partner-section animate-on-scroll fade-up"
+        id="contact"
       >
         <div className="be-a-partner-content">
           <h2 className="section-title">Want to Partner With Us?</h2>

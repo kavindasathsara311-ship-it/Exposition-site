@@ -23,7 +23,7 @@ function AnimatedHeader({ className, children, animationClass = "animate-in" }) 
 
 export default function Timeline() {
   return (
-    <section>
+    <section id="time-line">
       <h1 style={{ display: "none" }}>Time Line</h1>
 
       <AnimatedHeader className="timeline-header animate-on-scroll fade-up">

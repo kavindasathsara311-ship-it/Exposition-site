@@ -77,7 +77,7 @@ export default function OCTeamStack() {
   const activeCard = cards[activeIndexToShow] || cards[len - 1];
 
   return (
-    <section ref={sectionRef} className="shuffle-section animate-on-scroll fade-up">
+    <section ref={sectionRef} className="shuffle-section animate-on-scroll fade-up" id="Oc-Team">
       <div className="shuffle-container">
         <div
           className="card-stack"

@@ -82,7 +82,7 @@ export default function KeynoteSpeakers() {
 
   return (
     <>
-      <section ref={sectionRef1} className="section-allKeynoteSpeaker animate-on-scroll fade-up">
+      <section ref={sectionRef1} className="section-allKeynoteSpeaker animate-on-scroll fade-up" id="cylinder">
         <h2 className="section-title">Keynote Speakers</h2>
         <p className="section-subtitle">Voices that fueled our vision</p>
         <div className="spotlight-container">

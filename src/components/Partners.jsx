@@ -19,7 +19,7 @@ function PartnerCard({ partner }) {
   };
 
   return (
-    <div className="partner-card" data-tier={partner.tier}>
+    <div className="partner-card" data-tier={partner.tier} id="partner-card">
       <div className="partner-card-header">
         <span className="partner-tier-badge">{partner.tier} Partner</span>
         <span className="partner-tier-icon">{getTierIcon(partner.tier)}</span>

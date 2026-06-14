@@ -51,12 +51,12 @@ export default function Navbar() {
       </div>
       <div className={`nav-links ${isMenuOpen ? "open" : ""}`} id="navLinks">
         <a className="navLink" href="#home" onClick={() => setIsMenuOpen(false)}>Home</a>
-        <a className="navLink" href="#about" onClick={() => setIsMenuOpen(false)}>About</a>
-        <a className="navLink" href="#services" onClick={() => setIsMenuOpen(false)}>Services</a>
-        <a className="navLink" href="#portfolio" onClick={() => setIsMenuOpen(false)}>Portfolio</a>
-        <a className="navLink" href="#portfolio" onClick={() => setIsMenuOpen(false)}>Highlights</a>
-        <a className="navLink" href="#portfolio" onClick={() => setIsMenuOpen(false)}>CommunityVoice</a>
-        <a className="navLink" href="#contact" onClick={() => setIsMenuOpen(false)}>Contact</a>
+        <a className="navLink" href="#time-line" onClick={() => setIsMenuOpen(false)}>Event Structure</a>
+        <a className="navLink" href="#cylinder" onClick={() => setIsMenuOpen(false)}>Highlights</a>
+        <a className="navLink" href="#key-note" onClick={() => setIsMenuOpen(false)}>Community voices</a>
+        <a className="navLink" href="#partner-card" onClick={() => setIsMenuOpen(false)}>partnerships</a>
+        <a className="navLink" href="#Oc-Team" onClick={() => setIsMenuOpen(false)}>Our Team</a>
+        <a className="navLink" href="#contact" onClick={() => setIsMenuOpen(false)}>Contact us</a>
       </div>
     </nav>
   );
