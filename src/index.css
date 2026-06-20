@@ -298,6 +298,292 @@ section{
     border-color: rgba(255, 255, 255, 0.6);
 }
 
+/* ==========================================================================
+   CINEMATIC HERO SPREAD-GROWTH ENGINE
+   ========================================================================== */
+.lun-slider {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    background-color: #030712;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Structural Background Base Viewport rules */
+.lun-bg-viewport {
+    position: absolute;
+    background-size: cover;
+    background-position: center;
+}
+
+.current-bg {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+/* Soft dark shading overlay to make your clean typography jump out */
+.lun-slider::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(
+        to right, 
+        rgba(3, 7, 18, 0.85) 20%, 
+        rgba(3, 7, 18, 0.3) 60%, 
+        rgba(3, 7, 18, 0.75)
+    );
+    z-index: 3; /* Floating safely directly over backgrounds */
+    pointer-events: none;
+}
+
+/* ==========================================================================
+   THE TRUE ELEMENT SPREADING TIMELINE ENGINE
+   ========================================================================== */
+.next-grow-bg {
+    z-index: 2;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);
+    transition: none; /* Keep flat static for frame capture state */
+}
+
+/* Morph parameters to fill 100% viewport dimensions cleanly when animation begins */
+.lun-slider.is-animating .next-grow-bg {
+    top: 0px !important;
+    left: 0px !important;
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 0px !important;
+    box-shadow: none;
+    transition: top 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                left 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                width 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                height 0.8s cubic-bezier(0.4, 0, 0.2, 1),
+                border-radius 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ==========================================================================
+   CONTENT WRAPPER FRAMES & SCALED LOGO
+   ========================================================================== */
+.lun-content-layer {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    display: flex;
+    align-items: center;
+    z-index: 10;
+    padding-left: 8%;
+    box-sizing: border-box;
+}
+
+.lun-content-wrapper {
+    max-width: 700px;
+    color: #ffffff;
+}
+
+/* Upgraded Large Exposition Logo Sizing */
+.lun-logo {
+    height: 85px;
+    width: auto;
+    object-fit: contain;
+    margin-bottom: 25px;
+    display: block;
+}
+
+.lun-title {
+    font-size: clamp(2.5rem, 5.5vw, 4.8rem);
+    font-weight: 900;
+    line-height: 1.1;
+    text-transform: uppercase;
+    margin: 0 0 18px 0;
+    letter-spacing: -1px;
+    text-shadow: 0 4px 24px rgba(0, 0, 0, 0.65);
+}
+
+.lun-desc {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+    margin-bottom: 35px;
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+}
+
+.lun-actions {
+    display: flex;
+    gap: 15px;
+}
+
+.lun-btn {
+    padding: 12px 30px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    letter-spacing: 2px;
+    border: none;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lun-btn.primary {
+    background-color: #ffffff;
+    color: #030712;
+}
+
+.lun-btn.primary:hover {
+    background-color: rgba(0, 255, 200, 1);
+    color: #030712;
+    box-shadow: 0 0 25px rgba(0, 255, 200, 0.45);
+}
+
+.lun-btn.secondary {
+    background: transparent;
+    color: #ffffff;
+    border: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+.lun-btn.secondary:hover {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: #ffffff;
+}
+
+/* ==========================================================================
+   SMALL CARDS STRIP PLACEMENTS
+   ========================================================================== */
+.lun-thumbnails-strip {
+    position: absolute;
+    bottom: 50px;
+    right: 50px;
+    display: flex;
+    gap: 20px;
+    z-index: 20;
+}
+
+.lun-thumb-card {
+    width: 120px;
+    height: 175px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 14px;
+    position: relative;
+    cursor: pointer;
+    overflow: hidden;
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), border-color 0.4s, opacity 0.4s;
+}
+
+.lun-thumb-card:hover {
+    transform: translateY(-8px) scale(1.04);
+    box-shadow: 0 15px 35px rgba(0, 255, 200, 0.25);
+    border-color: rgba(0, 255, 200, 0.5);
+}
+
+/* Instantly hides the source thumbnail node so the spreading layer animation handles visuals flawlessly */
+.lun-slider.is-animating .lun-thumb-card:first-child {
+    opacity: 0;
+    transform: scale(0.8);
+}
+
+.lun-thumb-card::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.1) 70%);
+    z-index: 1;
+}
+
+.lun-thumb-content {
+    position: absolute;
+    bottom: 14px;
+    left: 12px;
+    right: 12px;
+    color: #ffffff;
+    z-index: 2;
+}
+
+.lun-thumb-title {
+    font-weight: 700;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.lun-thumb-desc {
+    font-size: 0.65rem;
+    color: rgba(255, 255, 255, 0.55);
+    margin-top: 1px;
+}
+
+/* Arrow Paddle Interface Controls */
+.lun-arrows-ctrl {
+    position: absolute;
+    bottom: 50px;
+    left: 8%;
+    display: flex;
+    gap: 15px;
+    z-index: 20;
+}
+
+.lun-arrow-btn {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.lun-arrow-btn:hover {
+    background: #ffffff;
+    color: #030712;
+    transform: scale(1.08);
+}
+
+/* ==========================================================================
+   TEXT RESET KEYFRAMES
+   ========================================================================== */
+.lun-title, .lun-desc, .lun-actions {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.lun-slider.is-animating .lun-title,
+.lun-slider.is-animating .lun-desc,
+.lun-slider.is-animating .lun-actions {
+    animation: lunTextReset 0.75s ease-in-out forwards;
+}
+
+@keyframes lunTextReset {
+    0% { opacity: 1; transform: translateY(0px); }
+    30% { opacity: 0; transform: translateY(-15px); }
+    40% { opacity: 0; transform: translateY(25px); }
+    100% { opacity: 1; transform: translateY(0px); }
+}
+
+/* Responsive Structural Breakpoints */
+@media (max-width: 992px) {
+    .lun-content-layer { padding-left: 5%; padding-right: 5%; }
+    .lun-arrows-ctrl { left: 5%; }
+    .lun-thumbnails-strip { right: 5%; gap: 12px; }
+}
+
+@media (max-width: 768px) {
+    .lun-logo { height: 65px; }
+    .lun-thumbnails-strip { display: none; } /* Clear clutter from mobile views */
+    .lun-content-layer { padding-left: 24px; padding-right: 24px; }
+    .lun-arrows-ctrl { left: 24px; bottom: 35px; }
+}
+
 /* Compact Header Section */
 .timeline-header {
     text-align: center;

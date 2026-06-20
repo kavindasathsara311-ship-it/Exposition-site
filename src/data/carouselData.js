@@ -15,12 +15,12 @@ export const heroSlides = [
     subtitle: "Discover inspiring stories from emerging leaders and trailblazers driving change in entrepreneurship and technology."
   },
   {
-    image: "/Resources/Exposition - University Magazine_files/pexels-photo-3183197.jpeg",
+    image: "/Resources/Exposition - University Magazine_files/forum.png",
     title: "Thought Leadership for Tomorrow",
     subtitle: "Engage with visionary perspectives that prepare you for the future of business, IT, and digital ecosystems."
   },
   {
-    image: "/Resources/Exposition - University Magazine_files/pexels-photo-3183197.jpeg",
+    image: "/Resources/Exposition - University Magazine_files/pexels-photo-5989933.jpg",
     title: "Research Shaping the Future",
     subtitle: "Access impactful, cutting-edge research designed to inform and influence the next wave of innovation."
   },
