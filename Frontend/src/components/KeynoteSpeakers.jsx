@@ -23,7 +23,6 @@ export default function KeynoteSpeakers() {
       if (total === 0) return;
       const nextIndex = (activeIndex + 1) % total;
 
-      // Update active speaker card immediately
       setActiveIndex(nextIndex);
       setIsShifting(true);
 
@@ -71,7 +70,6 @@ export default function KeynoteSpeakers() {
 
   const spotlightLeader = keynoteSpeakersData[activeIndex];
 
-  // Calculate circular array loops for issues ticker
   const totalItems = keynoteSpeakersData.length;
   const prevIdx = (displayedIndex - 1 + totalItems) % totalItems;
   const nextIdx = (displayedIndex + 1) % totalItems;
@@ -83,7 +81,7 @@ export default function KeynoteSpeakers() {
   return (
     <>
       <section ref={sectionRef1} className="section-allKeynoteSpeaker animate-on-scroll fade-up" id="cylinder">
-        <h2 className="section-title">Keynote Speakers</h2>
+        <h2 className="section-title community-voices-header">Keynote Speakers</h2>
         <p className="section-subtitle">Voices that fueled our vision</p>
         <div className="spotlight-container">
           <div className="key-issuetime">
@@ -94,11 +92,7 @@ export default function KeynoteSpeakers() {
               </div>
               <div className="key-content" id="keyContent">
                 <div className="ticker-wrapper stacked-list-layout">
-                  <div
-                    className={`ticker-track ${isShifting ? "is-shifting" : ""} ${
-                      noTransition ? "no-transition" : ""
-                    }`}
-                  >
+                  <div className={`ticker-track ${isShifting ? "is-shifting" : ""} ${noTransition ? "no-transition" : ""}`}>
                     <span className="badge-tag issue-prev">{prevIssue}</span>
                     <span className="badge-tag issue-current">{currentIssue}</span>
                     <span className="badge-tag issue-next">{nextIssue}</span>
@@ -106,54 +100,50 @@ export default function KeynoteSpeakers() {
                 </div>
               </div>
               <div className="spotlight-controls">
-                <button
-                  className="spotlight-nav issue-previous-nav"
-                  onClick={() => rotateSpotlight(-1)}
-                  aria-label="Previous Spotlight"
-                >
+                <button className="spotlight-nav issue-previous-nav" onClick={() => rotateSpotlight(-1)} aria-label="Previous Spotlight">
                   <i className="fa-solid fa-chevron-up"></i>
                 </button>
-                <button
-                  className="spotlight-nav issue-next-nav"
-                  onClick={() => rotateSpotlight(1)}
-                  aria-label="Next Spotlight"
-                >
+                <button className="spotlight-nav issue-next-nav" onClick={() => rotateSpotlight(1)} aria-label="Next Spotlight">
                   <i className="fa-solid fa-chevron-down"></i>
                 </button>
               </div>
             </div>
           </div>
 
-          <div className="spotlight-slider" id="spotlightContainer">
-            <div className="spotlight-left">
-              <img src={spotlightLeader.image} alt={spotlightLeader.name} />
-            </div>
-            <div className="spotlight-right">
-              <h1 className="spotlight-name">{spotlightLeader.name}</h1>
-              <h2 className="spotlight-title">{spotlightLeader.title}</h2>
-              <h3 className="spotlight-company">{spotlightLeader.company}</h3>
-              <div className="quote-box">
-                <p>{spotlightLeader.quote}</p>
-              </div>
-              <div className="tag-row">
-                {spotlightLeader.tags.map((tag, idx) => (
-                  <span key={idx} className="pill-tag">
-                    {tag}
-                  </span>
-                ))}
+          {/* Using unique key ensures full animation resets smoothly on change */}
+          <div className="spotlight-slider-split" key={activeIndex}>
+            
+            {/* CARD 1: Image Wrapper (Slides up in center, then slides LEFT) */}
+            <div className="split-card-left-wrapper">
+              <div className="speaker-image-card">
+                <img src={spotlightLeader.image} alt={spotlightLeader.name} />
               </div>
             </div>
+            
+            {/* CARD 2: Content Wrapper (Hidden underneath image initially, then slides RIGHT) */}
+            <div className="split-card-right-wrapper">
+              <div className="speaker-content-card">
+                <h1 className="spotlight-name">{spotlightLeader.name}</h1>
+                <h2 className="spotlight-title">{spotlightLeader.title}</h2>
+                <h3 className="spotlight-company">{spotlightLeader.company}</h3>
+                <div className="quote-box">
+                  <p>{spotlightLeader.quote}</p>
+                </div>
+                <div className="tag-row">
+                  {spotlightLeader.tags.map((tag, idx) => (
+                    <span key={idx} className="pill-tag">{tag}</span>
+                  ))}
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
 
       <section ref={sectionRef2} className="section-allKeynoteSpeaker animate-on-scroll fade-up">
         <p className="section-subtitle">Latest Keynote Speakers</p>
-        <div
-          ref={gridContainerRef}
-          className={`leaders-grid ${isExpanded ? "expanded" : ""}`}
-          id="leadersGridContainer"
-        >
+        <div ref={gridContainerRef} className={`leaders-grid ${isExpanded ? "expanded" : ""}`} id="leadersGridContainer">
           {keynoteSpeakersData.map((person, idx) => (
             <div key={idx} className="grid-card">
               <div className="card-img-wrapper">
