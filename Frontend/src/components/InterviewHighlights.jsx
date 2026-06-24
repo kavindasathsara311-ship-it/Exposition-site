@@ -13,6 +13,8 @@ export default function InterviewHighlights() {
 
   const highlights = interviewHighlightsData;
 
+  const isPausedRef = useRef(false);
+
   useEffect(() => {
     const track = trackRef.current;
     if (!track || highlights.length === 0) return;
@@ -48,7 +50,7 @@ export default function InterviewHighlights() {
       const delta = (time - lastTime) / 1000;
       lastTime = time;
 
-      if (originalWidth > 0) {
+      if (originalWidth > 0 && !isPausedRef.current) {
         posRef.current += speed * delta;
         if (posRef.current >= originalWidth) {
           posRef.current -= originalWidth;
@@ -90,11 +92,19 @@ export default function InterviewHighlights() {
     <section ref={sectionRef} className="section-allKeynoteSpeaker interview-highlights animate-on-scroll fade-up">
       <h2 className="section-title community-voices-header">Interview Highlights</h2>
       <p className="section-subtitle">Insights from industry pioneers shaping the future</p>
-      <div ref={containerRef} className="highlights-row" id="highlightsRowContainer">
+      <div 
+        ref={containerRef} 
+        className="highlights-row" 
+        id="highlightsRowContainer"
+        onMouseEnter={() => { isPausedRef.current = true; }}
+        onMouseLeave={() => { isPausedRef.current = false; }}
+      >
         <div ref={trackRef} className="continuous-track">
           {displayedCards.map((person, idx) => (
             <div key={idx} className="row-card">
-              <img src={person.image} alt={person.name} className="row-card-img" />
+              <div className="row-card-img-wrapper">
+                <img src={person.image} alt={person.name} className="row-card-img" />
+              </div>
               <div className="row-card-content">
                 <div className="row-card-header">
                   <h3>{person.name}</h3>
