@@ -2735,8 +2735,8 @@ section{
     }
     .speaker-image-card,
     .speaker-content-card {
-        width: 92% !important;
-        height: 90% !important;
+        width: 72% !important;
+        height: 60% !important;
     }
     .speaker-content-card {
         padding: 15px 12px !important; /* Smaller paddings */
@@ -2804,20 +2804,21 @@ section{
     
     /* 2-column grid for speakers cards on mobile */
     .leaders-grid {
+        margin-left: 20px;
         grid-template-columns: repeat(2, 1fr) !important;
-        column-gap: 15px !important;
+        column-gap: 10px !important;
         row-gap: 25px !important;
         padding: 20px 10px !important;
-        max-height: 460px !important; /* Contain 1 row on mobile */
+        max-height: 280px !important; /* Contain 1 row on mobile */
     }
     .leaders-grid.expanded {
         max-height: 6000px !important;
     }
     .grid-card {
-        width: 100% !important;
+        width: 80% !important;
         margin-left: 0px !important;
         top: 0 !important;
-        height: 390px !important;
+        height: 250px !important;
     }
     .card-img-wrapper {
         height: 100% !important;
