@@ -18,6 +18,8 @@ export default function KeynoteSpeakers() {
 
   // Autoplay loop
   useEffect(() => {
+    let shiftTimeout;
+    let resetTransitionTimeout;
     const interval = setInterval(() => {
       const total = keynoteSpeakersData.length;
       if (total === 0) return;
@@ -26,22 +28,22 @@ export default function KeynoteSpeakers() {
       setActiveIndex(nextIndex);
       setIsShifting(true);
 
-      const shiftTimeout = setTimeout(() => {
+      shiftTimeout = setTimeout(() => {
         setNoTransition(true);
         setDisplayedIndex(nextIndex);
         setIsShifting(false);
 
-        const resetTransitionTimeout = setTimeout(() => {
+        resetTransitionTimeout = setTimeout(() => {
           setNoTransition(false);
         }, 50);
-
-        return () => clearTimeout(resetTransitionTimeout);
       }, 600);
+    }, 6000);
 
-      return () => clearTimeout(shiftTimeout);
-    }, 3500);
-
-    return () => clearInterval(interval);
+    return () => {
+      clearInterval(interval);
+      if (shiftTimeout) clearTimeout(shiftTimeout);
+      if (resetTransitionTimeout) clearTimeout(resetTransitionTimeout);
+    };
   }, [activeIndex]);
 
   const rotateSpotlight = (direction) => {
