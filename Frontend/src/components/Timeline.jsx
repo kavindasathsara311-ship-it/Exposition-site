@@ -47,7 +47,7 @@ export default function Timeline() {
           <div className="content-box">
             <div className="item-title">Exposition Magazine</div>
             <p className="description">
-              The flagship publication bridging the worlds of business management and cutting-edge information technology.
+              A publication that brings together industry insights, innovation, and academic excellence.
             </p>
           </div>
           <div className="badge-container">
@@ -79,7 +79,7 @@ export default function Timeline() {
           <div className="content-box">
             <div className="item-title">Industrial Week</div>
             <p className="description">
-              A dedicated series exploring modern manufacturing centers, supply chains, and industrial technology operations.
+              Inspiring careers through meaningful connections, insights, and opportunities. 
             </p>
           </div>
           <div className="badge-container">
@@ -99,9 +99,9 @@ export default function Timeline() {
             <div className="horizontal-connector"></div>
           </div>
           <div className="content-box">
-            <div className="item-title">Edify</div>
+            <div className="item-title">Exposition Podcast Series</div>
             <p className="description">
-              Educational deep-dives, academic features, and knowledge-sharing frameworks designed to instruct and inspire.
+              Inspiring the next generation through meaningful conversations with industry leaders and innovators. 
             </p>
           </div>
         </AnimatedDiv>
@@ -109,9 +109,9 @@ export default function Timeline() {
         {/* 5. How You Did It (Left) */}
         <AnimatedDiv className="timeline-item left animate-on-scroll flip-3d-y">
           <div className="content-box">
-            <div className="item-title">How You Did It</div>
+            <div className="item-title">University Tech Events Hub</div>
             <p className="description">
-              Behind-the-scenes case studies highlighting successful project engineering, software solutions, and breakthrough strategies.
+              A centralized digital platform designed to showcase technology-focused events organized by universities across Sri Lanka.
             </p>
           </div>
           <div className="badge-container">
@@ -131,9 +131,9 @@ export default function Timeline() {
             <div className="horizontal-connector"></div>
           </div>
           <div className="content-box">
-            <div className="item-title">Workshops</div>
+            <div className="item-title">Industrial Forum</div>
             <p className="description">
-              Hands-on technical sessions covering software development architectures, systems design, and practical industry skills.
+              Empowering future professionals through meaningful conversations, industry insights, and real-world perspectives. 
             </p>
           </div>
         </AnimatedDiv>
@@ -141,9 +141,9 @@ export default function Timeline() {
         {/* 7. Industrial Forum (Left) */}
         <AnimatedDiv className="timeline-item left animate-on-scroll flip-3d-y">
           <div className="content-box">
-            <div className="item-title">Industrial Forum</div>
+            <div className="item-title">Career Fair</div>
             <p className="description">
-              An open exchange connecting academic insights with real-world corporate expertise to debate tech integration.
+              Connecting emerging undergraduate talents directly with premier tech enterprises and corporate recruiters.
             </p>
           </div>
           <div className="badge-container">
@@ -163,9 +163,9 @@ export default function Timeline() {
             <div className="horizontal-connector"></div>
           </div>
           <div className="content-box">
-            <div className="item-title">Career Fair</div>
+            <div className="item-title">Want to Partner with Us?</div>
             <p className="description">
-              Connecting emerging undergraduate talents directly with premier tech enterprises and corporate recruiters.
+              Connect with tomorrow’s talent while strengthening your presence within a futurefocused community. 
             </p>
           </div>
         </AnimatedDiv>

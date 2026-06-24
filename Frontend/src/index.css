@@ -118,7 +118,7 @@ body::before {
     font-weight: 500;
     font-family: 'Poppins', sans-serif;
     letter-spacing: 0.5px; /* Elegance spacing */
-    margin: 0 17px;
+    margin: 0 10px;
     padding: 8px 16px;
     border-radius: 12px;
     position: relative; /* Setup for the clever hover underline */
@@ -136,7 +136,7 @@ body::before {
     content: '';
     position: absolute;
     bottom: 0;
-    left: 10%;
+    left: 7.5%;
     width: 0;
     height: 2px;
     background-color: var(--gold-accent);
@@ -590,6 +590,7 @@ section{
 /* Compact Header Section */
 .timeline-header {
     text-align: center;
+    font-family: var(--deck-font);
     padding: 30px 20px 15px 20px; /* Reduced from 60px/40px */
 }
 
@@ -645,6 +646,7 @@ section{
     width: 100%;
     margin-bottom: 20px; /* Crucial: Cut from 50px to 20px to save massive height */
     position: relative;
+    font-family: var(--deck-font);
     align-items: center;
 }
 
@@ -4003,12 +4005,12 @@ body {
     left: 25%;
   }
   /* Slide Up into Center */
-  25%, 40% {
+  25%, 30% {
     transform: translateY(0%);
     left: 25%;
   }
   /* Split open to the Left side */
-  55%, 75% {
+  45%, 80% {
     transform: translateY(0%);
     left: 10%;
   }
@@ -4042,13 +4044,13 @@ body {
     opacity: 0;
   }
   /* Slide Up directly under Left card */
-  25%, 40% {
+  25%, 30% {
     transform: translateY(0%);
     left: 25%;
     opacity: 1;
   }
   /* Split open to the Right side */
-  55%, 75% {
+  45%, 80% {
     transform: translateY(0%);
     left: 50%;
     opacity: 1;
