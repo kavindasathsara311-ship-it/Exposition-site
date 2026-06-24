@@ -331,4 +331,4 @@ export default function GlobalCanvasBackground() {
   }, []);
 
   return <canvas ref={canvasRef} className="global-holo-canvas" />;
-}
+}
