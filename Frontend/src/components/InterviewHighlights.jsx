@@ -88,7 +88,7 @@ export default function InterviewHighlights() {
 
   return (
     <section ref={sectionRef} className="section-allKeynoteSpeaker interview-highlights animate-on-scroll fade-up">
-      <h2 className="section-title">Interview Highlights</h2>
+      <h2 className="section-title community-voices-header">Interview Highlights</h2>
       <p className="section-subtitle">Insights from industry pioneers shaping the future</p>
       <div ref={containerRef} className="highlights-row" id="highlightsRowContainer">
         <div ref={trackRef} className="continuous-track">
