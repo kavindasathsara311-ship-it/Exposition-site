@@ -1,68 +1,94 @@
-import React, { useRef } from "react";
-import { useScrollAnimation } from "../hooks/useScrollAnimation";
+import React from 'react';
 
 export default function Footer() {
-  const footerRef = useRef(null);
-  useScrollAnimation(footerRef, "animate-in");
-
   return (
-    <footer ref={footerRef} className="site-footer animate-on-scroll fade-up">
-      <div className="footer-content">
-        <div className="footer-container-main">
-          <img
-            src="/Resources/Exposition - University Magazine_files/Expo logo.svg"
-            alt="Exposition Magazine Logo"
-            className="footer-logo"
-          />
-          <p className="footer-para">
-            Celebrating academic excellence through compelling storytelling and meaningful
-            partnerships.
-          </p>
-          <img
-            src="/Resources/Exposition - University Magazine_files/unilogos.png"
-            alt="University Logos"
-            className="footer-unilogos"
-          />
-          <p>&copy; 2024 Exposition Magazine. All rights reserved.</p>
-        </div>
+    <footer className="w-full bg-[#0a0a0a] border-t border-white/5 pt-16 pb-8">
+      <div className="max-w-[1200px] mx-auto px-6">
+        <div className="flex flex-col md:flex-row justify-between gap-12 md:gap-8 mb-16">
+          
+          {/* Left Section - Brand, Description & Socials */}
+          <div className="max-w-md">
+            <img
+              src="/Resources/Exposition - University Magazine_files/Expo logo.svg"
+              alt="Exposition Magazine Logo"
+              className="h-10 mb-6 object-contain"
+            />
+            
+            <p className="text-[#a19d90] text-sm mb-6 font-medium tracking-wide leading-relaxed">
+              Celebrating academic excellence through compelling storytelling and meaningful
+              partnerships.
+            </p>
 
-        <div className="footer-container">
-          <p className="footer-quick-link">Quick Links</p>
-          <a href="#home">Events</a>
-          <a href="#services">Event Structure</a>
-          <a href="#portfolio">Partnerships</a>
-          <a href="#contact">Contact Us</a>
-        </div>
+            <img
+              src="/Resources/Exposition - University Magazine_files/unilogos.png"
+              alt="University Logos"
+              className="h-12 mb-8 object-contain opacity-80"
+            />
 
-        <div className="footer-container">
-          <p className="footer-quick-link">Get in Touch</p>
-          <a href="#contact">
-            <i className="fa fa-location"></i> University of Kelaniya, Sri Lanka
-          </a>
-          <a href="tel:+94716846120">
-            <i className="fa-solid fa-phone"></i> +94 71 684 6120
-          </a>
-          <a href="mailto:exposition.uok@gmail.com">
-            <i className="fa-solid fa-envelope"></i> exposition.uok@gmail.com
-          </a>
-
-          <p className="footer-quick-link">Follow Us</p>
-          <div className="social_link-container">
-            <a
-              href="https://web.facebook.com/Exposition.MIT?_rdc=1&_rdr#"
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Facebook"
-            >
-              <i className="fa-brands fa-facebook social_link"></i>
-            </a>
-            <a href="#home" aria-label="LinkedIn">
-              <i className="fa-brands fa-linkedin social_link"></i>
-            </a>
-            <a href="#home" aria-label="Instagram">
-              <i className="fa-brands fa-instagram social_link"></i>
-            </a>
+            <div className="flex gap-3">
+              {[
+                { icon: 'fa-facebook', label: 'Facebook', link: 'https://web.facebook.com/Exposition.MIT?_rdc=1&_rdr#' },
+                { icon: 'fa-linkedin', label: 'LinkedIn', link: '#home' },
+                { icon: 'fa-instagram', label: 'Instagram', link: '#home' }
+              ].map((social, idx) => {
+                return (
+                  <a 
+                    key={idx} 
+                    href={social.link} 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.label}
+                    className="w-10 h-10 rounded-xl border border-white/10 flex items-center justify-center text-white/70 hover:text-white hover:bg-white/5 transition-all"
+                  >
+                    <i className={`fa-brands ${social.icon} text-lg`}></i>
+                  </a>
+                );
+              })}
+            </div>
           </div>
+
+          {/* Right Section - Links */}
+          <div className="flex gap-16 md:gap-24 pr-4">
+            
+            {/* Quick Links Column */}
+            <div className="flex flex-col gap-5">
+              <h4 className="text-[#a19d90] text-sm mb-1 font-semibold tracking-wider uppercase">Quick Links</h4>
+              {[
+                { name: 'Events', href: '#home' },
+                { name: 'Event Structure', href: '#services' },
+                { name: 'Partnerships', href: '#portfolio' },
+                { name: 'Contact Us', href: '#contact' },
+              ].map((link) => (
+                <a key={link.name} href={link.href} className="text-white/90 text-[15px] hover:text-white hover:underline transition-all">
+                  {link.name}
+                </a>
+              ))}
+            </div>
+
+            {/* Get In Touch Column */}
+            <div className="flex flex-col gap-5">
+              <h4 className="text-[#a19d90] text-sm mb-1 font-semibold tracking-wider uppercase">Get in Touch</h4>
+              <a href="#contact" className="text-white/90 text-[15px] hover:text-white transition-all flex items-center gap-3">
+                 <i className="fa fa-location-dot w-4 text-center"></i> University of Kelaniya, Sri Lanka
+              </a>
+              <a href="tel:+94716846120" className="text-white/90 text-[15px] hover:text-white transition-all flex items-center gap-3">
+                 <i className="fa-solid fa-phone w-4 text-center"></i> +94 71 684 6120
+              </a>
+              <a href="mailto:exposition.uok@gmail.com" className="text-white/90 text-[15px] hover:text-white transition-all flex items-center gap-3">
+                 <i className="fa-solid fa-envelope w-4 text-center"></i> exposition.uok@gmail.com
+              </a>
+            </div>
+            
+          </div>
+
+        </div>
+
+        {/* Bottom Divider & Copyright */}
+        <div className="w-full h-px bg-white/10 mb-8" />
+        <div className="text-center">
+          <p className="text-[#a19d90] text-[15px]">
+            &copy; 2024 Exposition Magazine. All rights reserved.
+          </p>
         </div>
       </div>
     </footer>

@@ -32,26 +32,19 @@ export default function App() {
         <Navbar />
       </section>
 
-      {/* Main Feature Sections Grid Flow */}
-      <Timeline />
-
-      <EventCarousel />
-
-      <KeynoteSpeakers />
-
-      <InterviewHighlights />
-
-      <WantToBeFeaturied type="featured" onOpenModal={openModal} />
-
-      <CommunityVoices />
-
-      <Partners />
-
-      <OCTeamStack />
-
-      <WantToBeFeaturied type="partner" onOpenModal={openModal} />
-
-      <DeckGallery />
+      {/* Main Feature Sections Grid Flow - Unified Professional Spacing */}
+      <main className="w-full space-y-24 lg:space-y-32 pb-32 pt-24 overflow-hidden">
+        <Timeline />
+        <EventCarousel />
+        <KeynoteSpeakers />
+        <InterviewHighlights />
+        <WantToBeFeaturied type="featured" onOpenModal={openModal} />
+        <CommunityVoices />
+        <Partners />
+        <OCTeamStack />
+        <WantToBeFeaturied type="partner" onOpenModal={openModal} />
+        <DeckGallery />
+      </main>
 
       <Footer />
 

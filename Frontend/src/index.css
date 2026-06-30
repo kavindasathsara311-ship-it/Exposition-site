@@ -1,8 +1,8 @@
-@tailwind base;
+﻿@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Gotham font — place font files in /public/fonts/ */
+/* Gotham font â€” place font files in /public/fonts/ */
 @font-face {
     font-family: 'Gotham';
     src: url('/fonts/Gotham-Light.woff2') format('woff2'),
@@ -98,7 +98,7 @@ body {
     padding-bottom: 0 !important;
 }
 
-/* ─── Global Base Setup ───────────────────────────────────── */
+/* â”€â”€â”€ Global Base Setup â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 body {
     background-color: #000000;
     color: var(--text-main);
@@ -134,7 +134,7 @@ body::before {
     /* Center the navbar perfectly */
     transform: translateX(-50%);
     width: 95vw;
-    max-width: 1500px;
+    max-width: 1200px;
     /* Prevents it from getting absurdly wide on huge monitors */
     margin-top: 2vh;
     height: 70px;
@@ -472,7 +472,7 @@ section {
 }
 
 .lun-content-wrapper {
-    max-width: 700px;
+    max-width: 1200px;
     color: #ffffff;
 }
 
@@ -686,7 +686,7 @@ section {
 }
 
 /* Responsive Structural Breakpoints */
-@media (max-width: 992px) {
+@media (max-width: 1200px) {
     .lun-content-layer {
         padding-left: 5%;
         padding-right: 5%;
@@ -702,7 +702,7 @@ section {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
     .lun-logo {
         height: 65px;
     }
@@ -763,8 +763,8 @@ section {
 /* Compact Timeline Layout Engine */
 .timeline-container {
     position: relative;
-    max-width: 1000px;
-    margin: 15px auto;
+    max-width: 1200px;
+    margin: 0 auto;
     /* Tighter margins */
     padding: 0 20px;
 }
@@ -810,7 +810,7 @@ section {
 
 /* Compact Content Boxes */
 .content-box {
-    max-width: 420px;
+    max-width: 1200px;
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     padding: 12px 20px;
@@ -918,7 +918,7 @@ section {
 }
 
 /* 3D Camera Environment Setup */
-/* ─── Holographic Carousel ────────────────────────────────── */
+/* â”€â”€â”€ Holographic Carousel â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 
 .holo-section {
     position: relative;
@@ -960,7 +960,7 @@ section {
     position: relative;
     z-index: 1;
     width: 100%;
-    max-width: 960px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 2.5rem 1rem;
     display: flex;
@@ -969,7 +969,7 @@ section {
     gap: 2rem;
 }
 
-/* ─── HUD bar ────────────────────────────────────────────── */
+/* â”€â”€â”€ HUD bar â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .holo-hud-bar {
     width: 100%;
     display: flex;
@@ -1000,7 +1000,7 @@ section {
     white-space: nowrap;
 }
 
-/* ─── Stage ──────────────────────────────────────────────── */
+/* â”€â”€â”€ Stage â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .holo-stage {
     position: relative;
     width: 100%;
@@ -1022,7 +1022,7 @@ section {
     transform-style: preserve-3d;
 }
 
-/* ─── Cards ──────────────────────────────────────────────── */
+/* â”€â”€â”€ Cards â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .holo-card {
     position: absolute;
     width: 260px;
@@ -1093,7 +1093,7 @@ section {
     z-index: 2;
 }
 
-/* Scanline effect — only on active card */
+/* Scanline effect â€” only on active card */
 .holo-card-scan {
     position: absolute;
     inset: 0;
@@ -1252,7 +1252,7 @@ section {
     transform: scale(-1);
 }
 
-/* ─── Navigation ─────────────────────────────────────────── */
+/* â”€â”€â”€ Navigation â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .holo-nav {
     display: flex;
     align-items: center;
@@ -1285,7 +1285,7 @@ section {
     transform: scale(0.92);
 }
 
-/* ─── Ticker ─────────────────────────────────────────────── */
+/* â”€â”€â”€ Ticker â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .holo-ticker {
     display: flex;
     gap: 6px;
@@ -1327,7 +1327,7 @@ section {
     }
 }
 
-/* ─── Info strip ─────────────────────────────────────────── */
+/* â”€â”€â”€ Info strip â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .holo-info-strip {
     width: 100%;
     display: flex;
@@ -1374,7 +1374,7 @@ section {
     text-transform: uppercase;
 }
 
-/* ─── Command row ────────────────────────────────────────── */
+/* â”€â”€â”€ Command row â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .holo-cmd-row {
     display: flex;
     gap: 8px;
@@ -1407,8 +1407,8 @@ section {
     background: rgba(0, 255, 200, 0.06);
 }
 
-/* ─── Responsive ─────────────────────────────────────────── */
-@media (max-width: 600px) {
+/* â”€â”€â”€ Responsive â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+@media (max-width: 1200px) {
     .holo-stage {
         height: 360px;
         perspective: 900px;
@@ -1438,7 +1438,7 @@ section {
 
 .section-allKeynoteSpeaker {
     max-width: 1200px;
-    margin: 60px auto;
+    margin: 0 auto;
 }
 
 .section-keynoteSpeaker {
@@ -1649,7 +1649,7 @@ section {
     display: flex;
     align-items: center;
     min-width: 440px;
-    max-width: 460px;
+    max-width: 1200px;
     height: 160px;
     background: rgba(25, 34, 48, 0.45);
     border: 1px solid rgba(146, 121, 80, 0.2);
@@ -1972,7 +1972,7 @@ section {
     border-bottom: 1px solid rgba(226, 177, 60, 0.1);
 }
 
-@media (max-width: 480px) {
+@media (max-width: 1200px) {
     .header-main-title {
         font-size: 2rem;
     }
@@ -2345,7 +2345,7 @@ section {
     color: var(--text-gray);
     margin-bottom: 30px;
     text-align: center;
-    max-width: 600px;
+    max-width: 1200px;
 }
 
 .want-to-be-featured-section .contact-btn {
@@ -2387,7 +2387,7 @@ section {
 
 .community-voices-container {
     max-width: 1200px;
-    margin: 60px auto;
+    margin: 0 auto;
     padding: 0 20px;
     box-sizing: border-box;
 }
@@ -2621,7 +2621,7 @@ section {
 
 /* Injected pseudo quote decoration marks matching image design asset */
 .card-quote-text::before {
-    content: "“";
+    content: "â€œ";
     font-family: 'Gotham', sans-serif;
     font-size: 2rem;
     color: #927950;
@@ -2765,7 +2765,7 @@ section {
 
 .partners-section-header {
     text-align: center;
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto 40px auto;
     padding: 0 20px;
 }
@@ -2908,13 +2908,13 @@ section {
 /* ==========================================
    RESPONSIVE BREAKPOINTS (TABLETS & MOBILE)
    ========================================== */
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
     .voices-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-@media (max-width: 680px) {
+@media (max-width: 1200px) {
     .voices-grid {
         grid-template-columns: 1fr;
         gap: 20px;
@@ -2930,7 +2930,7 @@ section {
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 1200px) {
     :root {
         --carousel-card-width: 140px;
         --carousel-card-height: 215px;
@@ -2941,7 +2941,7 @@ section {
         flex-direction: row !important;
         min-width: unset !important;
         width: 95vw !important;
-        max-width: 380px !important;
+        max-width: 1200px !important;
         height: 120px !important;
         padding: 10px !important;
         gap: 12px !important;
@@ -2984,7 +2984,7 @@ section {
     }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
     :root {
         --carousel-card-width: 180px;
         --carousel-card-height: 275px;
@@ -3198,7 +3198,7 @@ section {
     }
 
     .want-to-be-featured-section {
-        margin: 40px auto;
+        margin: 0 auto;
     }
 
     .shuffle-container {
@@ -3221,8 +3221,8 @@ section {
     .be-a-partner-section a {
         display: block !important;
         width: 80% !important;
-        max-width: 340px !important;
-        margin: 12px auto !important;
+        max-width: 1200px !important;
+        margin: 0 auto !important;
     }
 
     .be-a-partner-section .contactTeam-btn,
@@ -3328,7 +3328,7 @@ section {
     display: flex;
     align-items: center;
     gap: 80px;
-    max-width: 1000px;
+    max-width: 1200px;
     width: 100%;
     padding: 0 40px;
 }
@@ -3556,7 +3556,7 @@ section {
 
 .be-a-partner-section {
     position: relative;
-    margin: 80px auto;
+    margin: 0 auto;
 }
 
 .be-a-partner-content {
@@ -3724,7 +3724,7 @@ section {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    max-width: 500px;
+    max-width: 1200px;
     width: 100%;
     margin-top: 10px;
 }
@@ -3899,7 +3899,7 @@ footer::after {
     border-radius: 5px;
 }
 
-@media (max-width: 868px) {
+@media (max-width: 1200px) {
     .footer-content {
         flex-direction: column;
         gap: 45px;
@@ -3923,9 +3923,9 @@ footer::after {
     .footer-unilogos,
     .footer-logo {
         width: 100%;
-        max-width: 280px;
+        max-width: 1200px;
         object-fit: contain;
-        margin: 15px auto;
+        margin: 0 auto;
     }
 
     .footer-quick-link {
@@ -3967,7 +3967,7 @@ footer::after {
 .contact-modal-container {
     position: relative;
     width: 90%;
-    max-width: 600px;
+    max-width: 1200px;
     background: var(--card-bg, rgba(15, 20, 29, 0.85));
     border: 1px solid rgba(226, 177, 60, 0.2);
     border-radius: 16px;
@@ -4095,7 +4095,7 @@ footer::after {
     box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
 }
 
-@media (max-width: 600px) {
+@media (max-width: 1200px) {
     .slide-content {
         top: 40%;
     }
@@ -4162,7 +4162,7 @@ footer::after {
 .explore-modal-card {
     position: relative;
     width: 100%;
-    max-width: 580px;
+    max-width: 1200px;
     background: var(--card-bg, #0f141d);
     border: 1px solid rgba(212, 175, 55, 0.2);
     border-radius: 24px;
@@ -4329,7 +4329,7 @@ body {
 .explore-modal-card {
     position: relative;
     width: 100%;
-    max-width: 580px;
+    max-width: 1200px;
     background: #0f141d;
     border: 1px solid rgba(212, 175, 55, 0.2);
     border-radius: 24px;
@@ -4462,7 +4462,7 @@ body {
     }
 }
 
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 1200px) {
     .explore-modal-scroll-wrapper {
         align-items: flex-start;
         padding: 20px 10px;
@@ -4628,16 +4628,16 @@ body {
 /*sptlight animetion end*/
 
 /* ================================================================
-   TIMELINE V2 — Magazine-editorial professional design
+   TIMELINE V2 â€” Magazine-editorial professional design
    ================================================================ */
 
-/* ── Section ──────────────────────────────────────────────────── */
+/* â”€â”€ Section â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .tl-section {
     padding: 80px 0 110px;
     position: relative;
 }
 
-/* ── Header ───────────────────────────────────────────────────── */
+/* â”€â”€ Header â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .tl-header {
     text-align: center;
     padding: 0 24px 72px;
@@ -4697,10 +4697,10 @@ body {
     letter-spacing: 0.06em;
 }
 
-/* ── Container & Spine ────────────────────────────────────────── */
+/* â”€â”€ Container & Spine â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .tl-container {
     position: relative;
-    max-width: 1080px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 24px 60px;
 }
@@ -4733,7 +4733,7 @@ body {
     transition: stroke-dashoffset 0.15s linear;
 }
 
-/* The travelling ball — position is driven by scroll in JS */
+/* The travelling ball â€” position is driven by scroll in JS */
 .tl-ball {
     position: absolute;
     left: 0;
@@ -4784,7 +4784,7 @@ body {
     }
 }
 
-/* ── Items ────────────────────────────────────────────────────── */
+/* â”€â”€ Items â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .tl-item {
     display: grid;
     grid-template-columns: 1fr 64px 1fr;
@@ -4794,7 +4794,7 @@ body {
     z-index: 1;
 }
 
-/* ── Slots ────────────────────────────────────────────────────── */
+/* â”€â”€ Slots â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .tl-slot {
     display: flex;
 }
@@ -4809,11 +4809,11 @@ body {
     padding-left: 34px;
 }
 
-/* ── Card (date label + bordered box, per reference) ──────────── */
+/* â”€â”€ Card (date label + bordered box, per reference) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .tl-card {
     position: relative;
     width: 100%;
-    max-width: 480px;
+    max-width: 1200px;
     /* Entry animation base state */
     opacity: 0;
     transition:
@@ -4872,7 +4872,7 @@ body {
         inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
-/* Spine-facing gold accent edge — thicker and brighter */
+/* Spine-facing gold accent edge â€” thicker and brighter */
 .tl-left .tl-card-box {
     border-right-width: 3px;
     border-right-color: #d4af37;
@@ -4901,7 +4901,7 @@ body {
     margin: 0;
 }
 
-/* ── Node ─────────────────────────────────────────────────────── */
+/* â”€â”€ Node â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .tl-node-area {
     display: flex;
     justify-content: center;
@@ -4942,8 +4942,8 @@ body {
         0 0 14px rgba(234, 161, 27, 0.65);
 }
 
-/* ── Mobile (≤ 768px) ─────────────────────────────────────────── */
-@media (max-width: 768px) {
+/* â”€â”€ Mobile (â‰¤ 768px) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+@media (max-width: 1200px) {
     .tl-section {
         padding: 56px 0 80px;
     }
@@ -4992,7 +4992,7 @@ body {
         transform: translateX(0) translateY(0);
     }
 
-    /* Cards sit to the right of the left rail — accent the spine-facing edge */
+    /* Cards sit to the right of the left rail â€” accent the spine-facing edge */
     .tl-item.tl-left .tl-card-box,
     .tl-item.tl-right .tl-card-box {
         border-right-width: 1px;
@@ -5008,10 +5008,10 @@ body {
     }
 }
 
-/* ── Tablet (769px – 1024px) ──────────────────────────────────── */
-@media (min-width: 769px) and (max-width: 1024px) {
+/* â”€â”€ Tablet (769px â€“ 1024px) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+@media (min-width: 769px) and (max-width: 1200px) {
     .tl-card {
-        max-width: 380px;
+        max-width: 1200px;
     }
 
     .tl-card-box {
