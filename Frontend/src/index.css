@@ -4726,10 +4726,10 @@ body {
 /* Bright trail that fills in behind the ball as you scroll */
 .tl-spine-trail {
     fill: none;
-    stroke: var(--gold-bright);
+    stroke: #ffffff;
     stroke-width: 2.5;
     stroke-linecap: round;
-    filter: drop-shadow(0 0 6px rgba(234, 161, 27, 0.55));
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.55));
     transition: stroke-dashoffset 0.15s linear;
 }
 
@@ -4751,27 +4751,10 @@ body {
     position: absolute;
     inset: 0;
     border-radius: 50%;
-    background: radial-gradient(circle at 35% 30%, #fff3cf 0%, var(--gold-bright) 42%, var(--gold-accent) 100%);
+    background: radial-gradient(circle at 35% 28%, #ffffff 0%, #d8d8d8 55%, #a0a0a0 100%);
     box-shadow:
-        0 0 0 4px rgba(234, 161, 27, 0.16),
-        0 0 14px 3px rgba(234, 161, 27, 0.65),
-        0 0 30px 8px rgba(234, 161, 27, 0.32),
-        inset 0 1px 2px rgba(255, 255, 255, 0.6);
-}
-
-/* Soft pulsing halo around the ball */
-.tl-ball-core::after {
-    content: '';
-    position: absolute;
-    inset: -6px;
-    border-radius: 50%;
-    border: 1px solid rgba(234, 161, 27, 0.4);
-    animation: tlBallPulse 2.4s ease-out infinite;
-}
-
-@keyframes tlBallPulse {
-    0%   { transform: scale(0.7); opacity: 0.7; }
-    100% { transform: scale(1.9); opacity: 0;   }
+        0 0 10px 4px rgba(255, 255, 255, 0.6),
+        0 0 28px 8px rgba(255, 255, 255, 0.25);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -4801,19 +4784,45 @@ body {
 
 .tl-slot-left {
     justify-content: flex-end;
-    padding-right: 34px;
+    padding-right: 56px;
+    position: relative;
 }
 
 .tl-slot-right {
     justify-content: flex-start;
-    padding-left: 34px;
+    padding-left: 56px;
+    position: relative;
+}
+
+/* Horizontal connector line — left card (line on the right of the slot) */
+.tl-item.tl-left .tl-slot-left::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 56px;
+    height: 1px;
+    background: linear-gradient(to left, rgba(212, 175, 55, 0.7), rgba(212, 175, 55, 0.15));
+    transform: translateY(-50%);
+}
+
+/* Horizontal connector line — right card (line on the left of the slot) */
+.tl-item.tl-right .tl-slot-right::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 56px;
+    height: 1px;
+    background: linear-gradient(to right, rgba(212, 175, 55, 0.7), rgba(212, 175, 55, 0.15));
+    transform: translateY(-50%);
 }
 
 /* ── Card (date label + bordered box, per reference) ──────────── */
 .tl-card {
     position: relative;
     width: 100%;
-    max-width: 480px;
+    max-width: 520px;
     /* Entry animation base state */
     opacity: 0;
     transition:
@@ -4828,7 +4837,7 @@ body {
 
 .tl-item.tl-right .tl-card {
     transform: translateX(38px) translateY(6px);
-    text-align: left;
+    text-align: right;
 }
 
 .tl-item.tl-visible .tl-card {
@@ -4851,7 +4860,7 @@ body {
 /* Black card box with gold border */
 .tl-card-box {
     position: relative;
-    padding: 22px 28px;
+    padding: 26px 34px;
     background: #050505;
     border: 1px solid rgba(212, 175, 55, 0.6);
     border-radius: 6px;
@@ -4872,15 +4881,15 @@ body {
         inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
-/* Spine-facing gold accent edge — thicker and brighter */
+/* Outer-edge gold accent line — aligns with text direction */
 .tl-left .tl-card-box {
-    border-right-width: 3px;
-    border-right-color: #d4af37;
+    border-left-width: 3px;
+    border-left-color: #d4af37;
 }
 
 .tl-right .tl-card-box {
-    border-left-width: 3px;
-    border-left-color: #d4af37;
+    border-right-width: 3px;
+    border-right-color: #d4af37;
 }
 
 .tl-card-title {
@@ -4992,11 +5001,13 @@ body {
         transform: translateX(0) translateY(0);
     }
 
-    /* Cards sit to the right of the left rail — accent the spine-facing edge */
+    /* On mobile all cards stack to the right — keep left accent edge */
     .tl-item.tl-left .tl-card-box,
     .tl-item.tl-right .tl-card-box {
+        border-left-width: 3px;
+        border-left-color: #d4af37;
         border-right-width: 1px;
-        border-left-width: 2px;
+        text-align: left;
     }
 
     .tl-header-logo img {
