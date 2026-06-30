@@ -67,7 +67,7 @@ export default function GlobalCanvasBackground() {
         this.size = Math.random() * 2 + 0.8;
         this.alpha = 1.0;
         this.decay = Math.random() * 0.04 + 0.02;
-        this.type = Math.random() > 0.4 ? "cyan" : "gold";
+        this.type = Math.random() > 0.4 ? "light" : "dark";
       }
       update() {
         this.x += this.vx;
@@ -79,10 +79,10 @@ export default function GlobalCanvasBackground() {
       draw() {
         ctx.save();
         ctx.globalAlpha = this.alpha;
-        ctx.fillStyle = this.type === "cyan" ? "rgba(0, 255, 200, 1)" : "rgba(234, 161, 27, 1)";
+        ctx.fillStyle = this.type === "light" ? "rgba(213, 165, 109, 1)" : "rgba(200, 141, 71, 1)";
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.shadowColor = this.type === "cyan" ? "rgba(0, 255, 200, 0.8)" : "rgba(234, 161, 27, 0.8)";
+        ctx.shadowColor = this.type === "light" ? "rgba(213, 165, 109, 0.8)" : "rgba(200, 141, 71, 0.8)";
         ctx.shadowBlur = 6;
         ctx.fill();
         ctx.restore();
@@ -133,7 +133,7 @@ export default function GlobalCanvasBackground() {
       draw() {
         ctx.save();
         const grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.radius);
-        const colorStr = this.type === "cyan" ? "0, 255, 200" : "234, 161, 27";
+        const colorStr = this.type === "light" ? "213, 165, 109" : "200, 141, 71";
         grad.addColorStop(0, `rgba(${colorStr}, ${this.alpha})`);
         grad.addColorStop(0.5, `rgba(${colorStr}, ${this.alpha * 0.4})`);
         grad.addColorStop(1, "rgba(0, 0, 0, 0)");
@@ -146,10 +146,10 @@ export default function GlobalCanvasBackground() {
     }
     const initGlows = () => {
       glows.length = 0;
-      glows.push(new GlowSource("cyan"));
-      glows.push(new GlowSource("gold"));
-      glows.push(new GlowSource("cyan"));
-      glows.push(new GlowSource("gold"));
+      glows.push(new GlowSource("light"));
+      glows.push(new GlowSource("dark"));
+      glows.push(new GlowSource("light"));
+      glows.push(new GlowSource("dark"));
     };
 
     resize(); // Call resize to initial W/H and call initGlows
@@ -165,7 +165,7 @@ export default function GlobalCanvasBackground() {
         this.alpha = Math.random() * 0.5 + 0.15;
         this.life = 1;
         this.decay = 0.001 + Math.random() * 0.002;
-        this.type = Math.random() > 0.35 ? "cyan" : "gold";
+        this.type = Math.random() > 0.35 ? "light" : "dark";
       }
       update() {
         this.x += this.vx;
@@ -190,11 +190,11 @@ export default function GlobalCanvasBackground() {
       draw() {
         ctx.save();
         ctx.globalAlpha = this.alpha * this.life;
-        ctx.fillStyle = this.type === "cyan" ? "rgba(0, 255, 200, 0.8)" : "rgba(234, 161, 27, 0.7)";
+        ctx.fillStyle = this.type === "light" ? "rgba(213, 165, 109, 0.8)" : "rgba(200, 141, 71, 0.7)";
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         if (this.size > 1.2) {
-          ctx.shadowColor = this.type === "cyan" ? "rgba(0, 255, 200, 0.5)" : "rgba(234, 161, 27, 0.5)";
+          ctx.shadowColor = this.type === "light" ? "rgba(213, 165, 109, 0.5)" : "rgba(200, 141, 71, 0.5)";
           ctx.shadowBlur = 4;
         }
         ctx.fill();
@@ -216,12 +216,12 @@ export default function GlobalCanvasBackground() {
       for (let i = -lines; i <= lines; i++) {
         const xBottom = vp + i * spacing * 3;
         const xTop = vp + (i / lines) * (W * 0.5 - vp);
-        
+
         const lineGrad = ctx.createLinearGradient(vp, vy, vp, H);
-        lineGrad.addColorStop(0, "rgba(0, 255, 200, 0.0)");
-        lineGrad.addColorStop(0.2, "rgba(0, 255, 200, 0.02)");
-        lineGrad.addColorStop(0.6, "rgba(0, 255, 200, 0.07)");
-        lineGrad.addColorStop(1, "rgba(0, 255, 200, 0.03)");
+        lineGrad.addColorStop(0, "rgba(213, 165, 109, 0.0)");
+        lineGrad.addColorStop(0.2, "rgba(213, 165, 109, 0.02)");
+        lineGrad.addColorStop(0.6, "rgba(213, 165, 109, 0.07)");
+        lineGrad.addColorStop(1, "rgba(213, 165, 109, 0.03)");
         
         ctx.strokeStyle = lineGrad;
         ctx.lineWidth = 0.5;
@@ -244,11 +244,11 @@ export default function GlobalCanvasBackground() {
         const horizGrad = ctx.createLinearGradient(vp - halfW, y, vp + halfW, y);
         const alpha = 0.06 * tScale;
         
-        horizGrad.addColorStop(0, "rgba(0, 255, 200, 0)");
-        horizGrad.addColorStop(0.25, `rgba(0, 255, 200, ${alpha * 0.3})`);
-        horizGrad.addColorStop(0.5, `rgba(0, 255, 200, ${alpha})`);
-        horizGrad.addColorStop(0.75, `rgba(0, 255, 200, ${alpha * 0.3})`);
-        horizGrad.addColorStop(1, "rgba(0, 255, 200, 0)");
+        horizGrad.addColorStop(0, "rgba(213, 165, 109, 0)");
+        horizGrad.addColorStop(0.25, `rgba(213, 165, 109, ${alpha * 0.3})`);
+        horizGrad.addColorStop(0.5, `rgba(213, 165, 109, ${alpha})`);
+        horizGrad.addColorStop(0.75, `rgba(213, 165, 109, ${alpha * 0.3})`);
+        horizGrad.addColorStop(1, "rgba(213, 165, 109, 0)");
         
         ctx.strokeStyle = horizGrad;
         ctx.lineWidth = 0.5;
@@ -302,8 +302,8 @@ export default function GlobalCanvasBackground() {
       if (mouse.active) {
         ctx.save();
         const mouseGrad = ctx.createRadialGradient(mouse.x, mouse.y, 0, mouse.x, mouse.y, 120);
-        mouseGrad.addColorStop(0, "rgba(0, 255, 200, 0.04)");
-        mouseGrad.addColorStop(0.5, "rgba(0, 255, 200, 0.01)");
+        mouseGrad.addColorStop(0, "rgba(213, 165, 109, 0.04)");
+        mouseGrad.addColorStop(0.5, "rgba(213, 165, 109, 0.01)");
         mouseGrad.addColorStop(1, "rgba(0, 0, 0, 0)");
         ctx.fillStyle = mouseGrad;
         ctx.beginPath();
