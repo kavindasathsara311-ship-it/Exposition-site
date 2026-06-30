@@ -1,3 +1,53 @@
+/* Gotham font — place font files in /public/fonts/ */
+@font-face {
+    font-family: 'Gotham';
+    src: url('/fonts/Gotham-Light.woff2') format('woff2'),
+         url('/fonts/Gotham-Light.woff') format('woff');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Gotham';
+    src: url('/fonts/Gotham-Book.woff2') format('woff2'),
+         url('/fonts/Gotham-Book.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Gotham';
+    src: url('/fonts/Gotham-Medium.woff2') format('woff2'),
+         url('/fonts/Gotham-Medium.woff') format('woff');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Gotham';
+    src: url('/fonts/Gotham-Book.woff2') format('woff2'),
+         url('/fonts/Gotham-Book.woff') format('woff');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Gotham';
+    src: url('/fonts/Gotham-Bold.woff2') format('woff2'),
+         url('/fonts/Gotham-Bold.woff') format('woff');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+@font-face {
+    font-family: 'Gotham';
+    src: url('/fonts/Gotham-Black.woff2') format('woff2'),
+         url('/fonts/Gotham-Black.woff') format('woff');
+    font-weight: 800 900;
+    font-style: normal;
+    font-display: swap;
+}
+
 /* Premium Compact Color Palette */
 :root {
     --gold-accent: #d4af37; /* Premium gold color */
@@ -11,14 +61,14 @@
     --card-bg: rgba(25, 34, 48, 0.55); 
     --card-border: rgba(146, 121, 80, 0.25); 
     --text-main: #b8c5d6;         
-    --font-serif: 'Cinzel', serif;
-    --font-sans: 'Inter', sans-serif;
+    --font-serif: 'Gotham', sans-serif;
+    --font-sans: 'Gotham', sans-serif;
 
     --deck-bg: #0b0c10;
     --deck-card-bg: #141722;
     --deck-accent: #e2b13c; /* Muted vintage gold */
     --deck-text: #ffffff;
-    --deck-font: 'Outfit', system-ui, sans-serif;
+    --deck-font: 'Gotham', sans-serif;
     --deck-bezier: cubic-bezier(0.25, 1, 0.2, 1);
 
     /* 3D Cylinder variables */
@@ -1594,7 +1644,7 @@ section{
 /* Injected pseudo quote decoration marks matching image design asset */
 .card-quote-text::before {
     content: "“";
-    font-family: Georgia, serif;
+    font-family: 'Gotham', sans-serif;
     font-size: 2rem;
     color: #927950;
     position: absolute;
@@ -2114,7 +2164,7 @@ section{
   justify-content: center;
   align-items: center;
   min-height: 600px;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Gotham', sans-serif;
   overflow: hidden;
 }
 
