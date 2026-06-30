@@ -263,7 +263,7 @@ export default function GlobalCanvasBackground() {
 
     const animate = () => {
       ctx.clearRect(0, 0, W, H);
-      ctx.fillStyle = "#030712";
+      ctx.fillStyle = "#000000";
       ctx.fillRect(0, 0, W, H);
       
       // Update and draw ambient drifting glow nebulae
