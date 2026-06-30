@@ -130,32 +130,6 @@ export default function CommunityVoices() {
             </div>
           </div>
 
-          <div id="voicesGrid" className="voices-grid">
-            {voicesData.map((item, index) => (
-              <div key={index} className="voice-card">
-                <div className="card-profile-header">
-                  <div className="profile-avatar">
-                    <img
-                      src={getImgSrc(item, `grid-${index}`)}
-                      alt=""
-                      onError={() => handleImgError(item, `grid-${index}`)}
-                    />
-                  </div>
-                  <div className="profile-meta">
-                    <h4 className="profile-name">{item.name}</h4>
-                    <span className="profile-tagline-gold" title={item.tagline}>
-                      {item.tagline}
-                    </span>
-                    <span className="profile-subtext" title={item.subtext}>
-                      {item.subtext}
-                    </span>
-                  </div>
-                </div>
-                <p className="card-quote-text">{item.quote.substring(0, 140)}...</p>
-              </div>
-            ))}
-          </div>
-
           <div className="stats-counter-row">
             <div className="stat-item">
               <h2 className="stat-number">20+</h2>

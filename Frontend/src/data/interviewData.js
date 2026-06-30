@@ -127,14 +127,14 @@ export const voicesData = [
   },
   {
     name: "Mr. Deepal Sooriyarachchi",
-    tagline: "Former Managing Director of AVIVA N...",
+    tagline: "Former Managing Director of AVIVA NDB Insurance",
     subtext: "Management Consultant & Author",
     quote: "For me being part of Exposition 20 was truly a privilege. The meticulous planning and flawless execution by the University of Kelaniya undergraduates of the exposition layout process left a professional impression on all attendees involved.",
     image: "/Resources/Exposition - University Magazine_files/deepal sooriyarachchi.png"
   },
   {
     name: "Prof. Roshan G. Ragel",
-    tagline: "Senior Lecturer , University of Perade...",
+    tagline: "Senior Lecturer, University of Peradeniya",
     subtext: "CEO, LEARN",
     quote: "It was a pleasure to be part of the Exposition Issue 20 Industrial Forum. The session was well-curated, with an engaging moderator and insightful panel discussions tackling industrial milestones realistically.",
     image: "/Resources/Exposition - University Magazine_files/ProfRagel-Photo4-1.jpg"
@@ -148,7 +148,7 @@ export const voicesData = [
   },
   {
     name: "Mr. Kosala Weerasena",
-    tagline: "Former Deputy General Manager @ S...",
+    tagline: "Former Deputy General Manager @ SLT-Mobitel",
     subtext: "Charted Telecom Engineer",
     quote: "Impressed with the talents of undergraduates (belonging to Department of Industrial Management, Faculty of Science, University of Kelaniya) exhibited during the event execution pipelines and corporate technical tracks.",
     image: "/Resources/Exposition - University Magazine_files/kosala.png"
