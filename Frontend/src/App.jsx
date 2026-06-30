@@ -13,7 +13,7 @@ import MarketingHero from "./components/MarketingHero";
 import DeckGallery from "./components/DeckGallery";
 import ContactModal from "./components/ContactModal";
 import Footer from "./components/Footer";
-import GlobalCanvasBackground from "./components/GlobalCanvasBackground";
+import { BackgroundPaths } from "./components/ui/background-paths";
 
 export default function App() {
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
@@ -24,7 +24,7 @@ export default function App() {
   return (
     <>
       {/* Background layer stays completely fixed behind the UI flow */}
-      <GlobalCanvasBackground />
+      <BackgroundPaths />
 
       {/* Home Hero Screen Layout Section */}
       <section className="homePage" id="home">

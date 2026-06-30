@@ -5041,3 +5041,14 @@ body {
 /* ================================================================
    END TIMELINE V2
    ================================================================ */
+
+/* Make all structural sections transparent to show global background */
+section,
+header,
+footer,
+main,
+article,
+.homePage {
+    background: transparent !important;
+    background-color: transparent !important;
+}
