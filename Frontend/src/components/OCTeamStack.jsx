@@ -27,11 +27,11 @@ export default function OCTeamStack() {
   const activeCard = teamMembers[activeIndex];
 
   return (
-    <section ref={sectionRef} className="py-24 animate-on-scroll fade-up overflow-hidden" id="Oc-Team">
+    <section ref={sectionRef} className="py-12 animate-on-scroll fade-up overflow-hidden" id="Oc-Team">
       <div className="flex flex-col items-center max-w-6xl mx-auto px-4">
         {/* Fanned Out Cards Container */}
         <div
-          className="relative w-full h-[450px] flex items-center justify-center mb-12"
+          className="relative w-full h-[340px] flex items-center justify-center mb-6"
           id="teamStack"
           onMouseEnter={() => setIsPlaying(false)}
           onMouseLeave={() => setIsPlaying(true)}
@@ -43,20 +43,24 @@ export default function OCTeamStack() {
             if (offset < -Math.floor(teamMembers.length / 2)) offset += teamMembers.length;
 
             const isActive = offset === 0;
-            const zIndex = 50 - Math.abs(offset);
-            const scale = 1 - Math.abs(offset) * 0.15;
-            const translateY = Math.abs(offset) * 30; // Push down the side cards
-            const translateX = offset * 160; // Spread out left and right
-            const rotateZ = offset * 10; // Tilt the side cards
+            const abs = Math.abs(offset);
+            const isVisible = abs <= 1; // Only the centre card + one on each side
+
+            const zIndex = 50 - abs;
+            const scale = isActive ? 1 : 0.85;
+            const translateY = isActive ? 0 : 26;   // Drop the side cards down a touch
+            const translateX = offset * 255;         // Spread far enough to fully clear the centre card
+            const rotateZ = offset * 9;              // Fan tilt on the side cards (centre stays upright)
 
             return (
               <div
                 key={card.index}
-                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[320px] h-[400px] rounded-2xl overflow-hidden shadow-2xl transition-all duration-700 ease-[cubic-bezier(0.25,0.8,0.25,1)]"
+                className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[240px] h-[300px] rounded-2xl overflow-hidden shadow-2xl transition-all duration-700 ease-[cubic-bezier(0.25,0.8,0.25,1)]"
                 style={{
                   zIndex,
                   transform: `translate(calc(-50% + ${translateX}px), calc(-50% + ${translateY}px)) scale(${scale}) rotate(${rotateZ}deg)`,
-                  opacity: Math.abs(offset) > 2 ? 0 : 1, // Only show 5 cards max (active + 2 left + 2 right)
+                  opacity: isVisible ? 1 : 0,
+                  filter: isActive ? "none" : "blur(4px) brightness(0.75)",
                   pointerEvents: isActive ? "auto" : "none",
                 }}
               >

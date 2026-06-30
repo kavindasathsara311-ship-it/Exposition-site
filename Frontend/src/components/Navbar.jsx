@@ -7,21 +7,32 @@ export default function Navbar() {
 
   useEffect(() => {
     let lastScrollY = window.pageYOffset;
-    const handleScroll = () => {
+    let ticking = false;
+    const THRESHOLD = 6; // ignore tiny scroll deltas so the bar doesn't flicker
+
+    const evaluate = () => {
       const currentScrollY = window.pageYOffset;
       if (currentScrollY <= 0) {
         setIsScrollDown(false);
+        lastScrollY = currentScrollY;
+        ticking = false;
         return;
       }
-      if (currentScrollY > lastScrollY) {
-        setIsScrollDown(true);
-      } else {
-        setIsScrollDown(false);
+      const delta = currentScrollY - lastScrollY;
+      if (Math.abs(delta) > THRESHOLD) {
+        setIsScrollDown(delta > 0);
+        lastScrollY = currentScrollY;
       }
-      lastScrollY = currentScrollY;
+      ticking = false;
     };
 
-    window.addEventListener("scroll", handleScroll);
+    const handleScroll = () => {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(evaluate);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 

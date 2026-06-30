@@ -150,6 +150,13 @@ body::before {
     z-index: 1000;
     padding: 0 10px;
     background-color: rgba(25, 34, 48, 0.02);
+    /* Promote to a stable GPU layer so the backdrop-filter blur isn't
+       re-rasterized every frame while the bar slides/fades back in —
+       that re-raster is what made the content shimmer/shake behind it. */
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transform: translate3d(-50%, 0, 0);
 }
 
 .nav-logo {
@@ -176,7 +183,7 @@ body::before {
 
 /* Updated scroll-down class to handle the new centering math */
 .navbar.scroll-down {
-    transform: translate(-50%, -150%);
+    transform: translate3d(-50%, -150%, 0);
     opacity: 0;
     /* Soft fade out while moving up */
 }
@@ -3005,6 +3012,23 @@ section {
     white-space: nowrap;
     animation: scrollMarqueeHorizontal 25s linear infinite;
     padding: 20px 0;
+}
+
+/* Lower row scrolls left (default keyframe direction) */
+.partner-marquee-track.row-left {
+    animation-direction: normal;
+}
+
+/* Upper row scrolls right, offset half a cycle so it stays out of phase
+   with the lower row */
+.partner-marquee-track.row-right {
+    animation-direction: reverse;
+    animation-delay: -12.5s;
+}
+
+/* Small gap between the two rows */
+.partner-marquee-viewport--lower {
+    margin-top: 8px;
 }
 
 .partner-marquee-viewport:hover .partner-marquee-track {
