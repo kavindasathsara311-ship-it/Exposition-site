@@ -3014,6 +3014,23 @@ section {
     padding: 20px 0;
 }
 
+/* Lower row scrolls left (default keyframe direction) */
+.partner-marquee-track.row-left {
+    animation-direction: normal;
+}
+
+/* Upper row scrolls right, offset half a cycle so it stays out of phase
+   with the lower row */
+.partner-marquee-track.row-right {
+    animation-direction: reverse;
+    animation-delay: -12.5s;
+}
+
+/* Small gap between the two rows */
+.partner-marquee-viewport--lower {
+    margin-top: 8px;
+}
+
 .partner-marquee-viewport:hover .partner-marquee-track {
     animation-play-state: paused !important;
 }

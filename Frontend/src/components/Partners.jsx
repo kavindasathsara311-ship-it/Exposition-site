@@ -53,8 +53,16 @@ export default function Partners() {
   const sectionRef = useRef(null);
   useScrollAnimation(sectionRef, "animate-in");
 
-  // Duplicate to ensure seamless CSS marquee scrolling
-  const marqueeItems = [...partnersData, ...partnersData];
+  // Both rows hold every partner. Each row is duplicated once so the CSS
+  // marquee can loop seamlessly (translateX 0 -> -50%).
+  const upperItems = [...partnersData, ...partnersData];
+
+  // Rotate the lower row by half the list so a given partner is never centred
+  // in both rows at the same moment — paired with the opposite scroll
+  // direction, each partner is only visible in one row at a time.
+  const half = Math.floor(partnersData.length / 2);
+  const lowerData = [...partnersData.slice(half), ...partnersData.slice(0, half)];
+  const lowerItems = [...lowerData, ...lowerData];
 
   return (
     <section>
@@ -67,12 +75,20 @@ export default function Partners() {
           </p>
         </div>
 
-        {/* Outer Viewport Masking Container */}
+        {/* Upper row — scrolls to the right */}
         <div className="partner-marquee-viewport">
-          {/* Inner Track that moves left/right continuously */}
-          <div id="partnerMarqueeTrack" className="partner-marquee-track">
-            {marqueeItems.map((partner, idx) => (
-              <PartnerCard key={idx} partner={partner} />
+          <div id="partnerMarqueeTrack" className="partner-marquee-track row-right">
+            {upperItems.map((partner, idx) => (
+              <PartnerCard key={`u-${idx}`} partner={partner} />
+            ))}
+          </div>
+        </div>
+
+        {/* Lower row — scrolls to the left */}
+        <div className="partner-marquee-viewport partner-marquee-viewport--lower">
+          <div className="partner-marquee-track row-left">
+            {lowerItems.map((partner, idx) => (
+              <PartnerCard key={`l-${idx}`} partner={partner} />
             ))}
           </div>
         </div>
