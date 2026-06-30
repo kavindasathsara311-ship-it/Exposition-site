@@ -258,10 +258,10 @@ export default function Timeline() {
         >
           <defs>
             <linearGradient id="tlSpineGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="rgba(174,138,79,0)" />
-              <stop offset="6%" stopColor="rgba(174,138,79,0.45)" />
-              <stop offset="94%" stopColor="rgba(174,138,79,0.45)" />
-              <stop offset="100%" stopColor="rgba(174,138,79,0)" />
+              <stop offset="0%" stopColor="rgba(255,255,255,0)" />
+              <stop offset="6%" stopColor="rgba(255,255,255,0.45)" />
+              <stop offset="94%" stopColor="rgba(255,255,255,0.45)" />
+              <stop offset="100%" stopColor="rgba(255,255,255,0)" />
             </linearGradient>
           </defs>
           <path ref={pathRef} className="tl-spine-path" d={pathD} />
