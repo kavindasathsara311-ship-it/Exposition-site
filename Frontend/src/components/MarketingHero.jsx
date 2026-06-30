@@ -7,7 +7,7 @@ export default function MarketingHero() {
   const baseCards = heroSlides.slice(0, 8); // Base 8 slides
   // Duplicate array multiple times to create a virtually infinite seamless loop
   const cards = Array(20).fill(baseCards).flat();
-  
+
   const [activeIndex, setActiveIndex] = useState(0);
 
   // Auto-play interval
@@ -19,10 +19,10 @@ export default function MarketingHero() {
   }, [cards.length]);
 
   return (
-    <div className="relative w-full min-h-screen bg-[#0a0a0a] flex items-center pt-24 pb-12 overflow-hidden font-sans">
+    <div className="relative w-full min-h-screen bg-transparent flex items-center pt-24 pb-12 overflow-hidden font-sans">
       
-      <div className="container mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
-        
+      <div className="w-full max-w-[1200px] mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+
         {/* Left Column - Dynamic Text and CTA */}
         <div className="lg:col-span-5 flex flex-col z-10 pt-10 lg:pt-0 min-h-[350px] justify-center">
           <AnimatePresence mode="wait">
@@ -41,7 +41,7 @@ export default function MarketingHero() {
               </p>
             </motion.div>
           </AnimatePresence>
-          
+
           {/* Action Buttons & Controls */}
           <div className="mt-10 flex flex-col items-start gap-6">
             {/* Action Buttons */}
@@ -56,13 +56,13 @@ export default function MarketingHero() {
 
             {/* Navigation Arrows */}
             <div className="flex items-center gap-4">
-              <button 
+              <button
                 onClick={() => setActiveIndex((prev) => (prev - 1 + cards.length) % cards.length)}
                 className="p-3 rounded-full bg-[#111] border border-[#D4AF37] hover:bg-[#222] hover:border-yellow-400 text-white transition-all shadow-[0_0_15px_rgba(212,175,55,0.15)]"
               >
                 <ChevronLeft className="w-5 h-5" />
               </button>
-              <button 
+              <button
                 onClick={() => setActiveIndex((prev) => (prev + 1) % cards.length)}
                 className="p-3 rounded-full bg-[#111] border border-[#D4AF37] hover:bg-[#222] hover:border-yellow-400 text-white transition-all shadow-[0_0_15px_rgba(212,175,55,0.15)]"
               >
@@ -74,16 +74,16 @@ export default function MarketingHero() {
 
         {/* Right Column - State-Driven Carousel with Blurry Edges */}
         <div className="lg:col-span-7 w-full relative z-10 flex items-center mt-12 lg:mt-0">
-          
+
           {/* Mask container to blur left and right edges */}
-          <div 
+          <div
             className="w-full overflow-hidden py-16"
-            style={{ 
+            style={{
               WebkitMaskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)',
               maskImage: 'linear-gradient(to right, transparent, black 15%, black 85%, transparent)'
             }}
           >
-            <motion.div 
+            <motion.div
               className="flex items-center"
               style={{ paddingLeft: '50%' }} // Center of the container
               animate={{ x: -(activeIndex * 200 + 220) }} // 160px inactive width + 40px gap = 200px step. 220px is half of active 440px width.
@@ -91,12 +91,12 @@ export default function MarketingHero() {
             >
               {cards.map((card, index) => {
                 const isActive = index === activeIndex;
-                
+
                 return (
-                  <motion.div 
-                    key={index} 
+                  <motion.div
+                    key={index}
                     className="flex-shrink-0 cursor-pointer mx-[20px] rounded-2xl overflow-hidden flex items-center justify-center bg-transparent"
-                    animate={{ 
+                    animate={{
                       width: isActive ? 440 : 160,
                       height: isActive ? 380 : 220,
                       opacity: isActive ? 1 : 0.3,
@@ -106,9 +106,9 @@ export default function MarketingHero() {
                     onClick={() => setActiveIndex(index)}
                   >
                     <div className="relative w-full h-full bg-transparent flex items-center justify-center">
-                      <img 
-                        src={card.image} 
-                        alt={card.title} 
+                      <img
+                        src={card.image}
+                        alt={card.title}
                         className="w-full h-full object-cover rounded-2xl shadow-2xl"
                       />
                     </div>
