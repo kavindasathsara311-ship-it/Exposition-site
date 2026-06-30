@@ -10,6 +10,17 @@ export default function HeroSlider() {
   const [originStyles, setOriginStyles] = useState({});
   const firstThumbRef = useRef(null);
 
+  const startTimerRef = useRef(null);
+  const endTimerRef = useRef(null);
+
+  // Clean up timers on unmount
+  useEffect(() => {
+    return () => {
+      clearTimeout(startTimerRef.current);
+      clearTimeout(endTimerRef.current);
+    };
+  }, []);
+
   // Automatic slide loop engine (Changes every 6 seconds)
   useEffect(() => {
     const timer = setInterval(() => {
@@ -37,14 +48,12 @@ export default function HeroSlider() {
     setNextIndex(targetIndex);
 
     // 3. Let React render the element at the thumbnail's size first, then step into full-screen mode on the next frame
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => {
-        setIsTransitioning(true);
-      });
-    });
+    startTimerRef.current = setTimeout(() => {
+      setIsTransitioning(true);
+    }, 50);
 
     // 4. Reset states once the 800ms transition finishes scaling out
-    setTimeout(() => {
+    endTimerRef.current = setTimeout(() => {
       setCurrentIndex(targetIndex);
       setNextIndex(null);
       setIsTransitioning(false);
@@ -102,8 +111,7 @@ export default function HeroSlider() {
 
       {/* Typography Copy Elements */}
       <div className="lun-content-layer">
-        <div className="lun-content-wrapper">
-          <img src="/Resources/ExpoLogo.png" className="lun-logo" alt="Exposition Logo" />
+        <div className="lun-content-wrapper">    
           <h1 className="lun-title">{upcomingSlide ? upcomingSlide.title : currentSlide.title}</h1>
           <p className="lun-desc">
             {upcomingSlide ? (upcomingSlide.subtitle || "Driving Innovation Forward") : (currentSlide.subtitle || "Driving Innovation Forward")}

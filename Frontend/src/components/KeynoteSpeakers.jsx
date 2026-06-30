@@ -5,58 +5,60 @@ import { useScrollAnimation } from "../hooks/useScrollAnimation";
 export default function KeynoteSpeakers() {
   const [activeIndex, setActiveIndex] = useState(0);
   const [displayedIndex, setDisplayedIndex] = useState(0);
-  const [isShifting, setIsShifting] = useState(false);
-  const [noTransition, setNoTransition] = useState(false);
+  const [tickerState, setTickerState] = useState("idle"); // "idle" | "shifting" | "reset"
   const [isExpanded, setIsExpanded] = useState(false);
 
   const sectionRef1 = useRef(null);
   const sectionRef2 = useRef(null);
   const gridContainerRef = useRef(null);
+  const isAnimatingRef = useRef(false);
 
   useScrollAnimation(sectionRef1, "animate-in");
   useScrollAnimation(sectionRef2, "animate-in");
 
-  // Autoplay loop
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const total = keynoteSpeakersData.length;
-      if (total === 0) return;
-      const nextIndex = (activeIndex + 1) % total;
+  const goToIndex = (nextIndex) => {
+    if (isAnimatingRef.current) return;
+    if (nextIndex === activeIndex) return;
+    isAnimatingRef.current = true;
 
-      setActiveIndex(nextIndex);
-      setIsShifting(true);
+    // 1. Pre-load next data into activeIndex so ticker shows correct next badge
+    setActiveIndex(nextIndex);
 
-      const shiftTimeout = setTimeout(() => {
-        setNoTransition(true);
+    // Small delay so React renders the new badge-tag values BEFORE animation starts
+    setTimeout(() => {
+      // 2. Trigger shift animation — ticker slides up smoothly
+      setTickerState("shifting");
+
+      setTimeout(() => {
+        // 3. Snap: disable transition, update displayedIndex to new speaker
+        setTickerState("reset");
         setDisplayedIndex(nextIndex);
-        setIsShifting(false);
 
-        const resetTransitionTimeout = setTimeout(() => {
-          setNoTransition(false);
-        }, 50);
+        // 4. Re-enable transition after DOM paints the reset position
+        setTimeout(() => {
+          setTickerState("idle");
+          isAnimatingRef.current = false;
+        }, 60);
+      }, 600); // duration matches CSS transition
+    }, 30);
+  };
 
-        return () => clearTimeout(resetTransitionTimeout);
-      }, 600);
-
-      return () => clearTimeout(shiftTimeout);
-    }, 3500);
-
+  // Autoplay
+  useEffect(() => {
+    const total = keynoteSpeakersData.length;
+    if (total === 0) return;
+    const interval = setInterval(() => {
+      const next = (activeIndex + 1) % total;
+      goToIndex(next);
+    }, 6000);
     return () => clearInterval(interval);
   }, [activeIndex]);
 
   const rotateSpotlight = (direction) => {
     const total = keynoteSpeakersData.length;
     if (total === 0) return;
-    const newIndex = (activeIndex + direction + total) % total;
-
-    setActiveIndex(newIndex);
-    setDisplayedIndex(newIndex);
-    setIsShifting(false);
-    setNoTransition(true);
-
-    setTimeout(() => {
-      setNoTransition(false);
-    }, 50);
+    const next = (activeIndex + direction + total) % total;
+    goToIndex(next);
   };
 
   const handleViewAllToggle = () => {
@@ -68,28 +70,38 @@ export default function KeynoteSpeakers() {
 
   if (keynoteSpeakersData.length === 0) return null;
 
+  const total = keynoteSpeakersData.length;
+
+  // Spotlight always shows activeIndex (updates immediately on change)
   const spotlightLeader = keynoteSpeakersData[activeIndex];
 
-  const totalItems = keynoteSpeakersData.length;
-  const prevIdx = (displayedIndex - 1 + totalItems) % totalItems;
-  const nextIdx = (displayedIndex + 1) % totalItems;
-
-  const prevIssue = keynoteSpeakersData[prevIdx].issue;
+  // Ticker badges: based on displayedIndex so they only visually update AFTER snap
+  const prevIdx      = (displayedIndex - 1 + total) % total;
+  const nextIdx      = (displayedIndex + 1) % total;
+  const prevIssue    = keynoteSpeakersData[prevIdx].issue;
   const currentIssue = keynoteSpeakersData[displayedIndex].issue;
-  const nextIssue = keynoteSpeakersData[nextIdx].issue;
+  const nextIssue    = keynoteSpeakersData[nextIdx].issue;
+
+  const isShifting    = tickerState === "shifting";
+  const noTransition  = tickerState === "reset";
 
   return (
     <>
       <section ref={sectionRef1} className="section-allKeynoteSpeaker animate-on-scroll fade-up" id="cylinder">
         <h2 className="section-title community-voices-header">Keynote Speakers</h2>
         <p className="section-subtitle">Voices that fueled our vision</p>
+
         <div className="spotlight-container">
+
+          {/* Issue ticker sidebar */}
           <div className="key-issuetime">
             <div className="issue-line"></div>
             <div className="spotlight-badge-container" id="issueBadgeContainer">
+
               <div className="icon-keybadge" id="issueBadge">
                 <i className="fa-solid fa-microphone-lines"></i>
               </div>
+
               <div className="key-content" id="keyContent">
                 <div className="ticker-wrapper stacked-list-layout">
                   <div className={`ticker-track ${isShifting ? "is-shifting" : ""} ${noTransition ? "no-transition" : ""}`}>
@@ -99,28 +111,36 @@ export default function KeynoteSpeakers() {
                   </div>
                 </div>
               </div>
+
               <div className="spotlight-controls">
-                <button className="spotlight-nav issue-previous-nav" onClick={() => rotateSpotlight(-1)} aria-label="Previous Spotlight">
+                <button
+                  className="spotlight-nav issue-previous-nav"
+                  onClick={() => rotateSpotlight(-1)}
+                  aria-label="Previous Spotlight"
+                >
                   <i className="fa-solid fa-chevron-up"></i>
                 </button>
-                <button className="spotlight-nav issue-next-nav" onClick={() => rotateSpotlight(1)} aria-label="Next Spotlight">
+                <button
+                  className="spotlight-nav issue-next-nav"
+                  onClick={() => rotateSpotlight(1)}
+                  aria-label="Next Spotlight"
+                >
                   <i className="fa-solid fa-chevron-down"></i>
                 </button>
               </div>
+
             </div>
           </div>
 
-          {/* Using unique key ensures full animation resets smoothly on change */}
+          {/* Spotlight slider */}
           <div className="spotlight-slider-split" key={activeIndex}>
-            
-            {/* CARD 1: Image Wrapper (Slides up in center, then slides LEFT) */}
+
             <div className="split-card-left-wrapper">
               <div className="speaker-image-card">
                 <img src={spotlightLeader.image} alt={spotlightLeader.name} />
               </div>
             </div>
-            
-            {/* CARD 2: Content Wrapper (Hidden underneath image initially, then slides RIGHT) */}
+
             <div className="split-card-right-wrapper">
               <div className="speaker-content-card">
                 <h1 className="spotlight-name">{spotlightLeader.name}</h1>
@@ -143,7 +163,11 @@ export default function KeynoteSpeakers() {
 
       <section ref={sectionRef2} className="section-allKeynoteSpeaker animate-on-scroll fade-up">
         <p className="section-subtitle">Latest Keynote Speakers</p>
-        <div ref={gridContainerRef} className={`leaders-grid ${isExpanded ? "expanded" : ""}`} id="leadersGridContainer">
+        <div
+          ref={gridContainerRef}
+          className={`leaders-grid ${isExpanded ? "expanded" : ""}`}
+          id="leadersGridContainer"
+        >
           {keynoteSpeakersData.map((person, idx) => (
             <div key={idx} className="grid-card">
               <div className="card-img-wrapper">

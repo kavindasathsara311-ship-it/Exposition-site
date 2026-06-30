@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Navbar from "./components/Navbar";
-import HeroSlider from "./components/HeroSlider";
+
 import Timeline from "./components/Timeline";
 import EventCarousel from "./components/EventCarousel";
 import KeynoteSpeakers from "./components/KeynoteSpeakers";
@@ -9,6 +9,7 @@ import WantToBeFeaturied from "./components/WantToBeFeaturied";
 import CommunityVoices from "./components/CommunityVoices";
 import Partners from "./components/Partners";
 import OCTeamStack from "./components/OCTeamStack";
+import MarketingHero from "./components/MarketingHero";
 import DeckGallery from "./components/DeckGallery";
 import ContactModal from "./components/ContactModal";
 import Footer from "./components/Footer";
@@ -27,29 +28,29 @@ export default function App() {
 
       {/* Home Hero Screen Layout Section */}
       <section className="homePage" id="home">
-        <HeroSlider />
+        <MarketingHero />
         <Navbar />
       </section>
 
       {/* Main Feature Sections Grid Flow */}
       <Timeline />
-      
+
       <EventCarousel />
-      
+
       <KeynoteSpeakers />
-      
+
       <InterviewHighlights />
-      
+
       <WantToBeFeaturied type="featured" onOpenModal={openModal} />
-      
+
       <CommunityVoices />
-      
+
       <Partners />
-      
+
       <OCTeamStack />
-      
+
       <WantToBeFeaturied type="partner" onOpenModal={openModal} />
-      
+
       <DeckGallery />
 
       <Footer />
