@@ -136,7 +136,7 @@ export default function EventCarousel() {
 
     const animate = () => {
       ctx.clearRect(0, 0, W, H);
-      ctx.fillStyle = "#030712";
+      ctx.fillStyle = "#000000";
       ctx.fillRect(0, 0, W, H);
       drawGrid();
       particlesRef.current.forEach(p => { p.update(); p.draw(); });
