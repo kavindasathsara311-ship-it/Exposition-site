@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Navbar from "./components/Navbar";
 
 import Timeline from "./components/Timeline";
-import EventCarousel from "./components/EventCarousel";
 import KeynoteSpeakers from "./components/KeynoteSpeakers";
 import InterviewHighlights from "./components/InterviewHighlights";
 import WantToBeFeaturied from "./components/WantToBeFeaturied";
@@ -34,8 +33,6 @@ export default function App() {
 
       {/* Main Feature Sections Grid Flow */}
       <Timeline />
-
-      <EventCarousel />
 
       <KeynoteSpeakers />
 
