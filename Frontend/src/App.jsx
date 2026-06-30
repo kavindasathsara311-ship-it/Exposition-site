@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import Navbar from "./components/Navbar";
 
 import Timeline from "./components/Timeline";
-import EventCarousel from "./components/EventCarousel";
 import KeynoteSpeakers from "./components/KeynoteSpeakers";
 import InterviewHighlights from "./components/InterviewHighlights";
 import WantToBeFeaturied from "./components/WantToBeFeaturied";
@@ -32,10 +31,9 @@ export default function App() {
         <Navbar />
       </section>
 
-      {/* Main Feature Sections Grid Flow - Unified Professional Spacing */}
-      <main className="w-full space-y-24 lg:space-y-32 pb-32 pt-24 overflow-hidden">
+      {/* Main Feature Sections Grid Flow - Centered & Reduced Spacing */}
+      <main className="w-full max-w-[1200px] mx-auto px-6 space-y-16 lg:space-y-20 pb-20 pt-12 overflow-hidden">
         <Timeline />
-        <EventCarousel />
         <KeynoteSpeakers />
         <InterviewHighlights />
         <WantToBeFeaturied type="featured" onOpenModal={openModal} />

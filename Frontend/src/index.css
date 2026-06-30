@@ -134,7 +134,7 @@ body::before {
     /* Center the navbar perfectly */
     transform: translateX(-50%);
     width: 95vw;
-    max-width: 1200px;
+    max-width: 1500px;
     /* Prevents it from getting absurdly wide on huge monitors */
     margin-top: 2vh;
     height: 70px;
@@ -472,7 +472,7 @@ section {
 }
 
 .lun-content-wrapper {
-    max-width: 1200px;
+    max-width: 700px;
     color: #ffffff;
 }
 
@@ -686,7 +686,7 @@ section {
 }
 
 /* Responsive Structural Breakpoints */
-@media (max-width: 1200px) {
+@media (max-width: 992px) {
     .lun-content-layer {
         padding-left: 5%;
         padding-right: 5%;
@@ -702,7 +702,7 @@ section {
     }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 768px) {
     .lun-logo {
         height: 65px;
     }
@@ -763,7 +763,7 @@ section {
 /* Compact Timeline Layout Engine */
 .timeline-container {
     position: relative;
-    max-width: 1200px;
+    max-width: 1000px;
     margin: 0 auto;
     /* Tighter margins */
     padding: 0 20px;
@@ -810,7 +810,7 @@ section {
 
 /* Compact Content Boxes */
 .content-box {
-    max-width: 1200px;
+    max-width: 420px;
     background: var(--card-bg);
     border: 1px solid var(--card-border);
     padding: 12px 20px;
@@ -960,7 +960,7 @@ section {
     position: relative;
     z-index: 1;
     width: 100%;
-    max-width: 1200px;
+    max-width: 960px;
     margin: 0 auto;
     padding: 2.5rem 1rem;
     display: flex;
@@ -1408,7 +1408,7 @@ section {
 }
 
 /* â”€â”€â”€ Responsive â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-@media (max-width: 1200px) {
+@media (max-width: 600px) {
     .holo-stage {
         height: 360px;
         perspective: 900px;
@@ -1452,6 +1452,222 @@ section {
     text-align: center;
     color: var(--text-gray);
     margin-bottom: 40px;
+}
+
+/* ============================================================
+   Keynote Speakers â€” premium card deck
+   ============================================================ */
+.ks-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.ks-head {
+    margin-bottom: 54px;
+}
+
+.ks-deck {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 34px;
+}
+
+/* Centre a trailing lone card instead of stretching it */
+.ks-deck > .ks-card:last-child:nth-child(odd) {
+    /* harmless on multi-col rows; keeps grid tidy */
+}
+
+.ks-card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: linear-gradient(165deg, #14110a 0%, #0a0a0a 60%);
+    border: 1px solid rgba(212, 175, 55, 0.22);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow:
+        0 18px 44px rgba(0, 0, 0, 0.55),
+        inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    opacity: 0;
+    transform: translateY(34px);
+    transition:
+        transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+        box-shadow 0.45s ease,
+        border-color 0.45s ease;
+}
+
+/* Reveal once the section scrolls into view (uses existing .animate-in hook) */
+.ks-section.animate-in .ks-card {
+    opacity: 1;
+    transform: translateY(0);
+    transition-delay: var(--ks-delay, 0ms);
+}
+
+.ks-card:hover {
+    transform: translateY(-10px);
+    border-color: rgba(240, 203, 82, 0.7);
+    box-shadow:
+        0 30px 60px rgba(0, 0, 0, 0.7),
+        0 0 30px rgba(212, 175, 55, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+/* Thin animated gold frame that glows on hover */
+.ks-card-frame {
+    position: absolute;
+    inset: 0;
+    border-radius: 16px;
+    padding: 1px;
+    background: linear-gradient(140deg,
+        rgba(240, 203, 82, 0.55),
+        rgba(212, 175, 55, 0) 40%,
+        rgba(212, 175, 55, 0) 60%,
+        rgba(240, 203, 82, 0.35));
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: 0;
+    transition: opacity 0.45s ease;
+    pointer-events: none;
+    z-index: 3;
+}
+
+.ks-card:hover .ks-card-frame {
+    opacity: 1;
+}
+
+/* â”€â”€ Media â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.ks-card-media {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+}
+
+.ks-card-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    filter: saturate(1.02) contrast(1.02);
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.ks-card:hover .ks-card-media img {
+    transform: scale(1.07);
+}
+
+.ks-card-shade {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to bottom,
+        rgba(10, 10, 10, 0) 35%,
+        rgba(10, 10, 10, 0.55) 78%,
+        #0a0a0a 100%);
+    pointer-events: none;
+}
+
+.ks-card-issue {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 2;
+    font-size: 0.62rem;
+    font-weight: 700;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: #0a0a0a;
+    background: linear-gradient(135deg, #f0cb52, #d4af37);
+    padding: 5px 11px;
+    border-radius: 999px;
+    box-shadow: 0 4px 14px rgba(212, 175, 55, 0.4);
+}
+
+/* â”€â”€ Body â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
+.ks-card-body {
+    position: relative;
+    z-index: 1;
+    padding: 22px 24px 26px;
+    margin-top: -34px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.ks-card-name {
+    font-size: 1.32rem;
+    font-weight: 800;
+    line-height: 1.2;
+    color: #ffffff;
+    margin: 0;
+}
+
+.ks-card-role {
+    font-size: 0.82rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    color: var(--gold-bright);
+    margin: 0;
+}
+
+.ks-card-company {
+    font-size: 0.76rem;
+    color: rgba(255, 255, 255, 0.55);
+    margin: 0 0 4px;
+}
+
+.ks-card-quote {
+    position: relative;
+    font-size: 0.86rem;
+    font-style: italic;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.78);
+    margin: 8px 0 14px;
+    padding-left: 16px;
+    border-left: 2px solid rgba(212, 175, 55, 0.4);
+}
+
+.ks-quote-mark {
+    color: var(--gold-bright);
+    font-weight: 700;
+    margin-right: 2px;
+}
+
+.ks-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: auto;
+}
+
+.ks-tag {
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    color: rgba(240, 203, 82, 0.9);
+    background: rgba(212, 175, 55, 0.1);
+    border: 1px solid rgba(212, 175, 55, 0.28);
+    padding: 4px 11px;
+    border-radius: 999px;
+    transition: background 0.3s ease, color 0.3s ease;
+}
+
+.ks-card:hover .ks-tag {
+    background: rgba(212, 175, 55, 0.18);
+    color: #ffffff;
+}
+
+@media (max-width: 768px) {
+    .ks-section {
+        margin: 0 auto;
+    }
+
+    .ks-deck {
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 24px;
+    }
 }
 
 .leaders-grid {
@@ -1649,7 +1865,7 @@ section {
     display: flex;
     align-items: center;
     min-width: 440px;
-    max-width: 1200px;
+    max-width: 460px;
     height: 160px;
     background: rgba(25, 34, 48, 0.45);
     border: 1px solid rgba(146, 121, 80, 0.2);
@@ -1972,7 +2188,7 @@ section {
     border-bottom: 1px solid rgba(226, 177, 60, 0.1);
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 480px) {
     .header-main-title {
         font-size: 2rem;
     }
@@ -2345,7 +2561,7 @@ section {
     color: var(--text-gray);
     margin-bottom: 30px;
     text-align: center;
-    max-width: 1200px;
+    max-width: 600px;
 }
 
 .want-to-be-featured-section .contact-btn {
@@ -2765,7 +2981,7 @@ section {
 
 .partners-section-header {
     text-align: center;
-    max-width: 1200px;
+    max-width: 800px;
     margin: 0 auto 40px auto;
     padding: 0 20px;
 }
@@ -2908,13 +3124,13 @@ section {
 /* ==========================================
    RESPONSIVE BREAKPOINTS (TABLETS & MOBILE)
    ========================================== */
-@media (max-width: 1200px) {
+@media (max-width: 1024px) {
     .voices-grid {
         grid-template-columns: repeat(2, 1fr);
     }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 680px) {
     .voices-grid {
         grid-template-columns: 1fr;
         gap: 20px;
@@ -2930,7 +3146,7 @@ section {
     }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 480px) {
     :root {
         --carousel-card-width: 140px;
         --carousel-card-height: 215px;
@@ -2941,7 +3157,7 @@ section {
         flex-direction: row !important;
         min-width: unset !important;
         width: 95vw !important;
-        max-width: 1200px !important;
+        max-width: 380px !important;
         height: 120px !important;
         padding: 10px !important;
         gap: 12px !important;
@@ -2984,7 +3200,7 @@ section {
     }
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 768px) {
     :root {
         --carousel-card-width: 180px;
         --carousel-card-height: 275px;
@@ -3221,7 +3437,7 @@ section {
     .be-a-partner-section a {
         display: block !important;
         width: 80% !important;
-        max-width: 1200px !important;
+        max-width: 340px !important;
         margin: 0 auto !important;
     }
 
@@ -3328,7 +3544,7 @@ section {
     display: flex;
     align-items: center;
     gap: 80px;
-    max-width: 1200px;
+    max-width: 1000px;
     width: 100%;
     padding: 0 40px;
 }
@@ -3724,7 +3940,7 @@ section {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    max-width: 1200px;
+    max-width: 500px;
     width: 100%;
     margin-top: 10px;
 }
@@ -3899,7 +4115,7 @@ footer::after {
     border-radius: 5px;
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 868px) {
     .footer-content {
         flex-direction: column;
         gap: 45px;
@@ -3923,7 +4139,7 @@ footer::after {
     .footer-unilogos,
     .footer-logo {
         width: 100%;
-        max-width: 1200px;
+        max-width: 280px;
         object-fit: contain;
         margin: 0 auto;
     }
@@ -3967,7 +4183,7 @@ footer::after {
 .contact-modal-container {
     position: relative;
     width: 90%;
-    max-width: 1200px;
+    max-width: 600px;
     background: var(--card-bg, rgba(15, 20, 29, 0.85));
     border: 1px solid rgba(226, 177, 60, 0.2);
     border-radius: 16px;
@@ -4095,7 +4311,7 @@ footer::after {
     box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
 }
 
-@media (max-width: 1200px) {
+@media (max-width: 600px) {
     .slide-content {
         top: 40%;
     }
@@ -4162,7 +4378,7 @@ footer::after {
 .explore-modal-card {
     position: relative;
     width: 100%;
-    max-width: 1200px;
+    max-width: 580px;
     background: var(--card-bg, #0f141d);
     border: 1px solid rgba(212, 175, 55, 0.2);
     border-radius: 24px;
@@ -4329,7 +4545,7 @@ body {
 .explore-modal-card {
     position: relative;
     width: 100%;
-    max-width: 1200px;
+    max-width: 580px;
     background: #0f141d;
     border: 1px solid rgba(212, 175, 55, 0.2);
     border-radius: 24px;
@@ -4462,7 +4678,7 @@ body {
     }
 }
 
-@media screen and (max-width: 1200px) {
+@media screen and (max-width: 768px) {
     .explore-modal-scroll-wrapper {
         align-items: flex-start;
         padding: 20px 10px;
@@ -4700,7 +4916,7 @@ body {
 /* â”€â”€ Container & Spine â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .tl-container {
     position: relative;
-    max-width: 1200px;
+    max-width: 1080px;
     margin: 0 auto;
     padding: 0 24px 60px;
 }
@@ -4726,10 +4942,10 @@ body {
 /* Bright trail that fills in behind the ball as you scroll */
 .tl-spine-trail {
     fill: none;
-    stroke: var(--gold-bright);
+    stroke: #ffffff;
     stroke-width: 2.5;
     stroke-linecap: round;
-    filter: drop-shadow(0 0 6px rgba(234, 161, 27, 0.55));
+    filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.55));
     transition: stroke-dashoffset 0.15s linear;
 }
 
@@ -4751,27 +4967,10 @@ body {
     position: absolute;
     inset: 0;
     border-radius: 50%;
-    background: radial-gradient(circle at 35% 30%, #fff3cf 0%, var(--gold-bright) 42%, var(--gold-accent) 100%);
+    background: radial-gradient(circle at 35% 28%, #ffffff 0%, #d8d8d8 55%, #a0a0a0 100%);
     box-shadow:
-        0 0 0 4px rgba(234, 161, 27, 0.16),
-        0 0 14px 3px rgba(234, 161, 27, 0.65),
-        0 0 30px 8px rgba(234, 161, 27, 0.32),
-        inset 0 1px 2px rgba(255, 255, 255, 0.6);
-}
-
-/* Soft pulsing halo around the ball */
-.tl-ball-core::after {
-    content: '';
-    position: absolute;
-    inset: -6px;
-    border-radius: 50%;
-    border: 1px solid rgba(234, 161, 27, 0.4);
-    animation: tlBallPulse 2.4s ease-out infinite;
-}
-
-@keyframes tlBallPulse {
-    0%   { transform: scale(0.7); opacity: 0.7; }
-    100% { transform: scale(1.9); opacity: 0;   }
+        0 0 10px 4px rgba(255, 255, 255, 0.6),
+        0 0 28px 8px rgba(255, 255, 255, 0.25);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -4801,19 +5000,45 @@ body {
 
 .tl-slot-left {
     justify-content: flex-end;
-    padding-right: 34px;
+    padding-right: 56px;
+    position: relative;
 }
 
 .tl-slot-right {
     justify-content: flex-start;
-    padding-left: 34px;
+    padding-left: 56px;
+    position: relative;
+}
+
+/* Horizontal connector line â€” left card (line on the right of the slot) */
+.tl-item.tl-left .tl-slot-left::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    width: 56px;
+    height: 1px;
+    background: linear-gradient(to left, rgba(212, 175, 55, 0.7), rgba(212, 175, 55, 0.15));
+    transform: translateY(-50%);
+}
+
+/* Horizontal connector line â€” right card (line on the left of the slot) */
+.tl-item.tl-right .tl-slot-right::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 56px;
+    height: 1px;
+    background: linear-gradient(to right, rgba(212, 175, 55, 0.7), rgba(212, 175, 55, 0.15));
+    transform: translateY(-50%);
 }
 
 /* â”€â”€ Card (date label + bordered box, per reference) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
 .tl-card {
     position: relative;
     width: 100%;
-    max-width: 1200px;
+    max-width: 520px;
     /* Entry animation base state */
     opacity: 0;
     transition:
@@ -4828,7 +5053,7 @@ body {
 
 .tl-item.tl-right .tl-card {
     transform: translateX(38px) translateY(6px);
-    text-align: left;
+    text-align: right;
 }
 
 .tl-item.tl-visible .tl-card {
@@ -4851,7 +5076,7 @@ body {
 /* Black card box with gold border */
 .tl-card-box {
     position: relative;
-    padding: 22px 28px;
+    padding: 26px 34px;
     background: #050505;
     border: 1px solid rgba(212, 175, 55, 0.6);
     border-radius: 6px;
@@ -4872,15 +5097,15 @@ body {
         inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
-/* Spine-facing gold accent edge â€” thicker and brighter */
+/* Outer-edge gold accent line â€” aligns with text direction */
 .tl-left .tl-card-box {
-    border-right-width: 3px;
-    border-right-color: #d4af37;
+    border-left-width: 3px;
+    border-left-color: #d4af37;
 }
 
 .tl-right .tl-card-box {
-    border-left-width: 3px;
-    border-left-color: #d4af37;
+    border-right-width: 3px;
+    border-right-color: #d4af37;
 }
 
 .tl-card-title {
@@ -4899,6 +5124,23 @@ body {
     font-style: italic;
     color: rgba(255, 255, 255, 0.72);
     margin: 0;
+}
+
+/* Subtle "Click to explore" hint anchored to the bottom-right corner */
+.tl-card-cta {
+    display: block;
+    margin-top: 14px;
+    text-align: right;
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(234, 161, 27, 0.7);
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.tl-item.tl-visible .tl-card-box:hover .tl-card-cta {
+    color: var(--gold-bright);
 }
 
 /* â”€â”€ Node â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
@@ -4943,7 +5185,7 @@ body {
 }
 
 /* â”€â”€ Mobile (â‰¤ 768px) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-@media (max-width: 1200px) {
+@media (max-width: 768px) {
     .tl-section {
         padding: 56px 0 80px;
     }
@@ -4992,11 +5234,13 @@ body {
         transform: translateX(0) translateY(0);
     }
 
-    /* Cards sit to the right of the left rail â€” accent the spine-facing edge */
+    /* On mobile all cards stack to the right â€” keep left accent edge */
     .tl-item.tl-left .tl-card-box,
     .tl-item.tl-right .tl-card-box {
+        border-left-width: 3px;
+        border-left-color: #d4af37;
         border-right-width: 1px;
-        border-left-width: 2px;
+        text-align: left;
     }
 
     .tl-header-logo img {
@@ -5009,9 +5253,9 @@ body {
 }
 
 /* â”€â”€ Tablet (769px â€“ 1024px) â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€â”€ */
-@media (min-width: 769px) and (max-width: 1200px) {
+@media (min-width: 769px) and (max-width: 1024px) {
     .tl-card {
-        max-width: 1200px;
+        max-width: 380px;
     }
 
     .tl-card-box {

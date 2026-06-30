@@ -1,4 +1,5 @@
 import React, { useRef, useState, useLayoutEffect, useEffect, useCallback } from "react";
+import { createPortal } from "react-dom";
 import { useScrollAnimation } from "../hooks/useScrollAnimation";
 
 const items = [
@@ -8,6 +9,7 @@ const items = [
     category: "Publication",
     title: "Exposition Magazine",
     desc: "A publication that brings together industry insights, innovation, and academic excellence.",
+    image: "/Resources/Exposition - University Magazine_files/magazine.png",
   },
   {
     id: "02",
@@ -15,6 +17,7 @@ const items = [
     category: "Content",
     title: "Interviews",
     desc: "Exclusive insights, executive perspectives, and dialogues with industry pioneers and tech leaders.",
+    image: "/Resources/Exposition - University Magazine_files/Interviews.png",
   },
   {
     id: "03",
@@ -22,6 +25,7 @@ const items = [
     category: "Event",
     title: "Industrial Week",
     desc: "Inspiring careers through meaningful connections, industry insights, and real-world opportunities.",
+    image: "/Resources/Exposition - University Magazine_files/pexels-photo-3183197.jpeg",
   },
   {
     id: "04",
@@ -29,6 +33,7 @@ const items = [
     category: "Media",
     title: "Exposition Podcast Series",
     desc: "Inspiring the next generation through meaningful conversations with industry leaders and innovators.",
+    image: "/Resources/Exposition - University Magazine_files/pexels-photo-1181376.jpg",
   },
   {
     id: "05",
@@ -36,6 +41,7 @@ const items = [
     category: "Platform",
     title: "University Tech Events Hub",
     desc: "A centralized digital platform showcasing technology-focused events from universities across Sri Lanka.",
+    image: "/Resources/Exposition - University Magazine_files/pexels-photo-5989933.jpg",
   },
   {
     id: "06",
@@ -43,6 +49,7 @@ const items = [
     category: "Forum",
     title: "Industrial Forum",
     desc: "Empowering future professionals through meaningful conversations and real-world industry perspectives.",
+    image: "/Resources/Exposition - University Magazine_files/forum.png",
   },
   {
     id: "07",
@@ -50,6 +57,7 @@ const items = [
     category: "Opportunity",
     title: "Career Fair",
     desc: "Connecting emerging undergraduate talent directly with premier tech enterprises and corporate recruiters.",
+    image: "/Resources/Exposition - University Magazine_files/pexels-photo-5989933.jpg",
   },
   {
     id: "08",
@@ -57,22 +65,36 @@ const items = [
     category: "Partnership",
     title: "Partner with Us",
     desc: "Connect with tomorrow's talent while strengthening your presence within a future-focused community.",
+    image: "/Resources/Exposition - University Magazine_files/pexels-photo-3183197.jpeg",
   },
 ];
 
-function TlCard({ item }) {
+function TlCard({ item, onOpen }) {
   return (
     <div className="tl-card">
       <span className="tl-card-date">{item.category}</span>
-      <div className="tl-card-box">
+      <div
+        className="tl-card-box"
+        role="button"
+        tabIndex={0}
+        style={{ cursor: "pointer" }}
+        onClick={() => onOpen(item)}
+        onKeyDown={(e) => {
+          if (e.key === "Enter" || e.key === " ") {
+            e.preventDefault();
+            onOpen(item);
+          }
+        }}
+      >
         <h3 className="tl-card-title">{item.title}</h3>
         <p className="tl-card-desc">{item.desc}</p>
+        <span className="tl-card-cta">Click to explore →</span>
       </div>
     </div>
   );
 }
 
-function TlItem({ item, index }) {
+function TlItem({ item, index, onOpen }) {
   const ref = useRef(null);
   useScrollAnimation(ref, "tl-visible");
   const isLeft = index % 2 === 0;
@@ -80,7 +102,7 @@ function TlItem({ item, index }) {
   return (
     <div ref={ref} className={`tl-item ${isLeft ? "tl-left" : "tl-right"}`}>
       <div className="tl-slot tl-slot-left">
-        {isLeft && <TlCard item={item} />}
+        {isLeft && <TlCard item={item} onOpen={onOpen} />}
       </div>
 
       <div className="tl-node-area">
@@ -90,7 +112,7 @@ function TlItem({ item, index }) {
       </div>
 
       <div className="tl-slot tl-slot-right">
-        {!isLeft && <TlCard item={item} />}
+        {!isLeft && <TlCard item={item} onOpen={onOpen} />}
       </div>
     </div>
   );
@@ -99,6 +121,14 @@ function TlItem({ item, index }) {
 export default function Timeline() {
   const headerRef = useRef(null);
   useScrollAnimation(headerRef, "tl-visible");
+
+  const [activeModalData, setActiveModalData] = useState(null);
+
+  // Lock body scroll while the explore modal is open.
+  useEffect(() => {
+    document.body.style.overflow = activeModalData ? "hidden" : "unset";
+    return () => { document.body.style.overflow = "unset"; };
+  }, [activeModalData]);
 
   const containerRef = useRef(null);
   const pathRef = useRef(null);   // base spine path — used for getPointAtLength()
@@ -258,10 +288,10 @@ export default function Timeline() {
         >
           <defs>
             <linearGradient id="tlSpineGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stopColor="rgba(174,138,79,0)" />
-              <stop offset="6%" stopColor="rgba(174,138,79,0.45)" />
-              <stop offset="94%" stopColor="rgba(174,138,79,0.45)" />
-              <stop offset="100%" stopColor="rgba(174,138,79,0)" />
+              <stop offset="0%" stopColor="rgba(255,255,255,0)" />
+              <stop offset="6%" stopColor="rgba(255,255,255,0.45)" />
+              <stop offset="94%" stopColor="rgba(255,255,255,0.45)" />
+              <stop offset="100%" stopColor="rgba(255,255,255,0)" />
             </linearGradient>
           </defs>
           <path ref={pathRef} className="tl-spine-path" d={pathD} />
@@ -273,9 +303,36 @@ export default function Timeline() {
         </div>
 
         {items.map((item, i) => (
-          <TlItem key={item.id} item={item} index={i} />
+          <TlItem key={item.id} item={item} index={i} onOpen={setActiveModalData} />
         ))}
       </div>
+
+      {activeModalData && createPortal(
+        <div className="explore-modal-backdrop" onClick={() => setActiveModalData(null)}>
+          <div className="explore-modal-scroll-wrapper" onClick={() => setActiveModalData(null)}>
+            <div className="explore-modal-card" onClick={(e) => e.stopPropagation()}>
+              <button className="explore-modal-close" onClick={() => setActiveModalData(null)}>&times;</button>
+              <div className="explore-modal-banner" style={{ backgroundImage: `url("${activeModalData.image}")` }} />
+              <div className="explore-modal-body">
+                <span className="explore-modal-badge">Exposition Hub Event</span>
+                <h2>{activeModalData.title}</h2>
+                <p className="explore-modal-desc">{activeModalData.desc}</p>
+                <div className="explore-modal-info-grid">
+                  <div className="info-item">
+                    <span className="info-label">Access Pass</span>
+                    <span className="info-val">University Delegation / Open Invitation</span>
+                  </div>
+                  <div className="info-item">
+                    <span className="info-label">Ecosystem Focus</span>
+                    <span className="info-val">Synergy between Academic Research &amp; Industry Tech</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
     </section>
   );
 }
