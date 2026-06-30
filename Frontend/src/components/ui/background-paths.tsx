@@ -29,10 +29,10 @@ export function BackgroundPaths() {
   }, []);
 
   return (
-    <div className="fixed inset-0 z-[-10] pointer-events-none overflow-hidden bg-[#050505]">
+    <div className="fixed inset-0 z-[-10] pointer-events-none overflow-hidden bg-[#000000]">
       {/* Soft gradient overlay to blend the edges */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#050505] z-10" />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#050505] via-transparent to-[#050505] z-10" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#000000] z-10" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[#000000] via-transparent to-[#000000] z-10" />
       
       <svg
         className="w-full h-full object-cover"
